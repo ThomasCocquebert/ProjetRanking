@@ -1,11 +1,6 @@
 #include "stdlib.h"
 #include "stdio.h"
-
-struct vector
-{
-	int size;
-	double* array;
-}; typedef struct vector VEC;
+#include "../lib/vector.h"
 
 int initVECNull(VEC* vector, int size) {
 	vector->size = size;
@@ -47,37 +42,4 @@ void printVEC(VEC* vector) {
 void freeMemVEC(VEC* vector) {
 	free(vector->array);
 	free(vector);
-}
-
-
-
-int main(int argc, char** argv) {
-	VEC* pi = malloc(sizeof(VEC));
-
-	if(pi == NULL) {
-		printf("Allocation failed for the vector\n");
-		exit(1);
-	}
-
-	if(!initVECNull(pi, 10)) {
-		exit(1);
-	}
-
-	printVEC(pi);
-	freeMemVEC(pi);
-
-	VEC* pi2 = malloc(sizeof(VEC));
-
-	if(pi2 == NULL) {
-		printf("Allocation failed for the vector\n");
-		exit(1);
-	}
-
-	if(!initVEC(pi2, 10)) {
-		exit(1);
-	}
-
-	printVEC(pi2);
-	freeMemVEC(pi2);
-	exit(0);
 }
