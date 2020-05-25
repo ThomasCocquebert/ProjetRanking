@@ -6,14 +6,14 @@
 int NBarcs(FILE* fichier){
 	int NombreArcs;
 	fscanf(fichier, "%d", &NombreArcs);			//Lecture de la première valeur du fichier
-	printf("%d \n", NombreArcs);
+	//~ printf("%d \n", NombreArcs);
 	return NombreArcs;
 }
 
 int NBsommets(FILE* fichier){
 	int NombreSommets;
 	fscanf(fichier, "%d", &NombreSommets);			//Nombre de sommets de la matrice
-	printf("%d \n", NombreSommets);
+	//~ printf("%d \n", NombreSommets);
     return NombreSommets;
 }
 
@@ -33,21 +33,22 @@ Liste* LectureFichier(FILE* fichier, int NombreSommets){
 	for(i = 0; i < NombreSommets; i++){
             fscanf(fichier, "%d", &NumeroLigne);		//Numéro de la ligne actuellement lu dans le fichier
             fscanf(fichier, "%d", &NbArcsLigne);		//Nombre d'arcs pour cette ligne
-            printf("%d %d", NumeroLigne, NbArcsLigne);
+            //~ printf("%d %d", NumeroLigne, NbArcsLigne);
             for(j = 0; j < NbArcsLigne; j++){
 				fscanf(fichier, "%d %lf", &Colonne, &Valeur);	//Recupération pour chaque arc de la ligne de sa destination et de sa colonne
 				Sommet *s = initSommet( NumeroLigne-1, Colonne-1, Valeur);
 				ajouterSommet(&tab[Colonne-1],s);
-				printf(" %d %lf", Colonne, Valeur);
+				//~ printf(" %d %lf", Colonne, Valeur);
 			}
-			printf("\n");
+			//~ printf("\n");
         } 
      fclose(fichier);   		//Fermeture du fichier
      return tab;
 }
 
 int main(){
-	int time = 0;
+	int temps = 0;
+	int tempsInit = clock();
 	char *Chemin = "../Graphe/Stanford.txt";
 	FILE* fichier = NULL;
 	fichier = fopen(Chemin, "r+");
@@ -56,11 +57,12 @@ int main(){
 	int NombreArcs = NBarcs(fichier);
 	int NombreSommets = NBsommets(fichier);
 	Liste* tab = LectureFichier(fichier, NombreSommets);
-	afficherTableau(tab,NombreSommets);
+	//~ afficherTableau(tab,NombreSommets);
 	freeTableau(tab, NombreSommets);
-	time = clock();		//Temps d'execution du programme
+	int tempsFin = clock();		//Temps d'execution du programme
+	temps = (tempsFin - tempsInit)*1e-6;
 	printf("\033[1;32m");
-    printf("Temps d'execution = %d ms\n", time);
+    printf("Temps d'execution = %d ms\n", temps);
 	printf("\033[0m");
 	}
     else
