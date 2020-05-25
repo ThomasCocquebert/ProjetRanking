@@ -1,6 +1,6 @@
 #ifndef VECTOR_H
 #define VECTOR_H
-#define DELTA 0.000001
+#define DELTA 0.0000001
 
 /*
 Structure of vector
@@ -35,6 +35,12 @@ Free the allocated memory for the vector
 Free the vector itself at the end
 */
 void freeMemVEC(VEC* vector);
+
+/*
+Make v2 - v1 and return this in a VEC*
+return NULL if v1 and v2 have diffeent size
+*/
+VEC* minusVector(VEC* v1, VEC* v2);
 
 /*
 Compare 2 vectors and check if the difference between each element is < DELTA

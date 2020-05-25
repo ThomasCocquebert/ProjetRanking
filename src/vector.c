@@ -51,20 +51,48 @@ void freeMemVEC(VEC* vector) {
 	free(vector);
 }
 
-int compVector(VEC* v1, VEC* v2) {
-	if(v1->size != v2->size) {
+VEC* minusVector(VEC* v1, VEC* v2) {
+	if (v1->size != v2->size) {
 		printf("\033[1;31m");
 		printf("Different size for v1 and v2\n");
 		printf("\033[0m");
+		return NULL;
+	}
+	VEC* tmp = malloc(sizeof(VEC));
+	if(tmp == NULL) {
+		printf("\033[1;31m");
+		printf("Allocation failed for tmp vector\n");
+		printf("\033[0m");
+		return NULL;
+	}
+	if(!initVECNull(tmp, v1->size)) {
+		free(tmp);
+		return NULL;
+	}
+	for(int i = 0; i < tmp->size; i++) {
+		tmp->array[i] = v2->array[i] - v1->array[i];
+	}
+	return tmp;
+}
+
+int compVector(VEC* v1, VEC* v2) {
+	VEC* minus = minusVector(v1, v2);
+	if(minus == NULL) {
 		return -1;
 	}
-
-	for(int i = 0; i < v1->size; i++) {
-		//printf("abs : %lf DELTA : %lf\n", abs((v1->array[i]-v2->array[i])), DELTA);
-		if(fabs((v1->array[i]-v2->array[i])) > DELTA) {
-			return 0;
-		}
+	double tmp = 0.0;
+	for(int i = 0; i < minus->size; i++) {
+		tmp += minus->array[i]*minus->array[i];
 	}
-
-	return 1;
+	tmp = sqrt(tmp);
+	if(tmp <= DELTA) {
+		printf("\033[1;32m");
+		printf("DELTA reached\n");
+		printf("\033[0m");
+		freeMemVEC(minus);
+		return 1;
+	} else {
+		freeMemVEC(minus);
+		return 0;
+	}
 }

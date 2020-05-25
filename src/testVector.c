@@ -32,11 +32,11 @@ int main(int argc, char** argv) {
 
 	switch(compVector(pi, pi2)) {
 		case 0:
-			printf("Difference between pi and pi2 > DELTA\n");
+			printf("pi and pi2 has difference > DELTA\n");
 			break;
 
 		case 1:
-			printf("Difference between pi and pi2 <= DELTA\n");
+			printf("pi and pi2 has difference <= DELTA\n");
 			break;
 
 		default:
@@ -48,11 +48,11 @@ int main(int argc, char** argv) {
 
 	switch(compVector(pi2, pi2)) {
 		case 0:
-			printf("Difference between pi and pi2 > DELTA\n");
+			printf("pi2 and pi2 has difference > DELTA\n");
 			break;
 
 		case 1:
-			printf("Difference between pi and pi2 <= DELTA\n");
+			printf("pi2 and pi2 has difference <= DELTA\n");
 			break;
 
 		default:
