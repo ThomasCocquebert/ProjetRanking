@@ -1,7 +1,8 @@
 #include "stdio.h"
 #include "stdlib.h"
 
-void LectureFichier(){
+
+void LectureFichier(char *Chemin){
 	FILE* fichier = NULL;
     char caractereActuel;
     int NombreArcs;
@@ -12,7 +13,7 @@ void LectureFichier(){
 	double Valeur;
     int i;
     int j;
-     fichier = fopen("web1.txt", "r+");
+     fichier = fopen(Chemin, "r+");
     if (fichier != NULL)
     {
 		fscanf(fichier, "%d", &NombreArcs);			//Lecture de la première valeur du fichier
@@ -35,12 +36,12 @@ void LectureFichier(){
     }
     else
     {
-        printf("Impossible d'ouvrir le fichier test.txt");
+        printf("Impossible d'ouvrir le graphe");
     }
 }
 
 int main(){
-	
-	LectureFichier();
+	char *c = "../Graphe/web1.txt";
+	LectureFichier(c);
     return 0;
 }
