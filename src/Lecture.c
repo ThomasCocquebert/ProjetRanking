@@ -47,7 +47,7 @@ Liste* LectureFichier(FILE* fichier, int NombreSommets){
 }
 
 int main(){
-	int temps = 0;
+	double temps = 0;
 	int tempsInit = clock();
 	char *Chemin = "../Graphe/Stanford.txt";
 	FILE* fichier = NULL;
@@ -60,9 +60,9 @@ int main(){
 	//~ afficherTableau(tab,NombreSommets);
 	freeTableau(tab, NombreSommets);
 	int tempsFin = clock();		//Temps d'execution du programme
-	temps = (tempsFin - tempsInit)*1e-6;
+	temps = (float)(tempsFin-tempsInit)/CLOCKS_PER_SEC;
 	printf("\033[1;32m");
-    printf("Temps d'execution = %d ms\n", temps);
+    printf("Temps d'execution = %lf ms\n", temps);
 	printf("\033[0m");
 	}
     else
