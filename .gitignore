@@ -55,3 +55,11 @@ dkms.conf
 test
 testVector
 testStructure
+
+# Useless graph
+Graphe/in-2004v2.txt
+Graphe/Stanford.txt
+Graphe/Stanford_BerkeleyV2.txt
+Graphe/wb-cs-stanford.txt
+Graphe/wb-edu.txt
+Graphe/wikipedia-20051105V2.txt

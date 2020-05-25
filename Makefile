@@ -1,20 +1,33 @@
+# Compile
+CC=gcc
+
+# Linker
+LINK=gcc
+
+# Build vector.o
 vector.o:	src/vector.c
-	gcc -Wall -g -c src/vector.c -lm
+	$(CC) -Wall -g -c src/vector.c -lm
 
+# Build structure.o
 structure.o:	src/structure.c
-	gcc -Wall -g -c src/structure.c
+	$(CC) -Wall -g -c src/structure.c
 
+# Build testVector.o
 testVector.o:	src/testVector.c lib/vector.h
-	gcc -Wall -g -c src/testVector.c -lm
+	$(CC) -Wall -g -c src/testVector.c -lm
 
+# Build testVector executable
 testVector:	testVector.o vector.o
-	gcc -Wall -g -o testVector vector.o testVector.o -lm
+	$(CC) -Wall -g -o testVector vector.o testVector.o -lm
 
+# Run testVector executable
 runTestVector: testVector
 	./testVector
 
+# Run testVEctor with valgrind
 runTestVectorMemory: testVector
 	valgrind ./testVector
 
+# Clean .o files and executable
 clean :
-	rm *.o
+	rm *.o testVector
