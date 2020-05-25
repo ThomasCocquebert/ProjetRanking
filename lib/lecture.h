@@ -1,5 +1,5 @@
-#ifndef STRUCTURE_H
-#define STRUCTURE_H
+#ifndef LECTURE_H
+#define LECTURE_H
 
 /*
 Get the number of arcs

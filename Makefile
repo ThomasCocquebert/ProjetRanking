@@ -20,9 +20,17 @@ Lecture.o:	src/Lecture.c lib/structure.h
 testVector.o:	src/testVector.c lib/vector.h
 	$(CC) -Wall -g -c src/testVector.c -lm
 
+# Build calcul.o
+calcul.o:	src/calcul.c lib/vector.h lib/structure.h lib/Lecture.h
+	$(CC) -Wall -g -c src/calcul.c -lm
+
 # Build testVector executable
 testVector:	testVector.o vector.o
 	$(CC) -Wall -g -o testVector vector.o testVector.o -lm
+
+# Build calcul executable
+calcul:	calcul.o vector.o structure.o Lecture.o
+	$(CC) -Wall -g -o calcul vector.o calcul.o Lecture.o structure.o -lm
 
 # Run testVector executable
 runTestVector: testVector
