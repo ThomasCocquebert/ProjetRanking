@@ -63,6 +63,14 @@ Sommet* initSommet(int ligne,int colonne,double proba)
 	return s;
 }
 
+Liste* initTableau(int nb) {
+	Liste* tab = malloc(nb * sizeof(Liste));
+	if (tab == NULL) {
+		printf("Erreur allocation tableau");
+		exit(1);
+	}
+	return tab;
+}
 void ajouterSommet(Liste *l,Sommet* s) {
 	//si liste vide:
 	if (l->first == NULL) {
@@ -139,6 +147,12 @@ void afficherColonne(Colonne* c) {
 	}
 }
 
+void afficherTableau(Liste *tab, int taille) {
+	for(int i = 0; i<taille; i++) {
+		afficherListe(&tab[i]);
+	}
+}
+
 void freeSommet(Sommet* s) {
 	free(s);
 }
@@ -161,25 +175,27 @@ void freeListe(Liste *l) {
 
 int main(int argc, char** argv ){
 	
-	Colonne* c = initColonne();
+	Liste* tab = initTableau(2);
+	
 	//~ printf("Hello world!\n");
-	Liste* l = initListe();
-	Liste* l2 = initListe();
+	//~ Liste* l = initListe();
+	//~ Liste* l2 = initListe();
+	//~ ajouterListe(c,l);
+	//~ ajouterListe(c,l2);
 	//~ l = initListe();
 	Sommet* s1 = initSommet(1,1,0.5);
 	Sommet* s2 = initSommet(2,1,0.7);
-	ajouterSommet(l,s1);
-	ajouterSommet(l,s2);
+	ajouterSommet(&tab[0],s1);
+	ajouterSommet(&tab[0],s2);
 	
 	Sommet* s3 = initSommet(2,1,0.7);
 	Sommet* s4 = initSommet(2,1,0.7);
-	ajouterSommet(l2,s3);
-	ajouterSommet(l2,s4);
+	ajouterSommet(&tab[1],s3);
+	ajouterSommet(&tab[1],s4);
 	
-	ajouterListe(c,l);
-	ajouterListe(c,l2);
+	afficherTableau(tab,2);
 	
-	afficherColonne(c);
+	//~ afficherColonne(c);
 	//~ afficherListe(l);
 	//~ afficherListe(l2);
 	
