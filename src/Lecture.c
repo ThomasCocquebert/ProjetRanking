@@ -37,7 +37,7 @@ void LectureFichier(char *Chemin){
     }
     else
     {
-        printf("Impossible d'ouvrir le graphe");
+		printf("Impossible d'ouvrir le graphe");
     }
 }
 
@@ -46,6 +46,8 @@ int main(){
 	char *c = "../Graphe/web1.txt";
 	LectureFichier(c);
 	time = clock();		//Temps d'execution du programme
+	printf("\033[1;32m");
     printf("Temps d'execution = %d ms\n", time);
+	printf("\033[0m");
     return 0;
 }
