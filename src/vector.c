@@ -6,7 +6,7 @@ int initVECNull(VEC* vector, int size) {
 	vector->size = size;
 	vector->array = calloc(vector->size, sizeof(double));
 	if(vector->array == NULL) {
-		printf("\033[0;31m");
+		printf("\033[1;31m");
 		printf("Allocation of VEC->array failed\n");
 		printf("\033[0m");
 		return 0;
@@ -20,7 +20,7 @@ int initVEC(VEC* vector, int size) {
 	vector->size = size;
 	vector->array = malloc(sizeof(double) * vector->size);
 	if(vector->array == NULL) {
-		printf("\033[0;31m");
+		printf("\033[1;31m");
 		printf("Allocation of VEC->array failed\n");
 		printf("\033[0m");
 		return 0;
