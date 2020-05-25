@@ -1,5 +1,6 @@
 #include "stdio.h"
 #include "stdlib.h"
+#include "time.h"
 
 
 void LectureFichier(char *Chemin){
@@ -41,7 +42,10 @@ void LectureFichier(char *Chemin){
 }
 
 int main(){
+	int time = 0;
 	char *c = "../Graphe/web1.txt";
 	LectureFichier(c);
+	time = clock();		//Temps d'execution du programme
+    printf("Temps d'execution = %d ms\n", time);
     return 0;
 }
