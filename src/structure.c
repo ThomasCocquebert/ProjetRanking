@@ -153,7 +153,7 @@ void afficherColonne(Colonne* c) {
 void afficherTableau(Liste *tab, int taille) {
 	printf("=======AFFICHAGE TABLEAU=========\n\n");
 	for(int i = 0; i<taille; i++) {
-		printf("******n°colone :%d\n",i);
+		printf("******n°colonne :%d\n",i);
 		afficherListe(&tab[i]);
 		printf("******\n\n");
 	}

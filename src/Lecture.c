@@ -51,10 +51,8 @@ int main(){
     {
 	int NombreSommets = NBsommets(fichier);
 	Liste* tab = LectureFichier(fichier, NombreSommets);
-	printf("NSOMMETS = %d\n",NombreSommets);
-	printf("\n\n------AffichageListe--------\n\n");
 	afficherTableau(tab,NombreSommets);
-	//~ freeListe(tab);
+	freeTableau(tab, NombreSommets);
 	time = clock();		//Temps d'execution du programme
 	printf("\033[1;32m");
     printf("Temps d'execution = %d ms\n", time);
