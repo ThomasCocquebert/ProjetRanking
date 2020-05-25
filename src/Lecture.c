@@ -3,13 +3,17 @@
 #include "time.h"
 #include "structure.c"
 
-int NBsommets(FILE* fichier){
+int NBarcs(FILE* fichier){
 	int NombreArcs;
-	int NombreSommets;
 	fscanf(fichier, "%d", &NombreArcs);			//Lecture de la première valeur du fichier
-	fscanf(fichier, "%d", &NombreSommets);			//Nombre de sommets de la matrice
 	printf("%d \n", NombreArcs);
-    printf("%d \n", NombreSommets);
+	return NombreArcs;
+}
+
+int NBsommets(FILE* fichier){
+	int NombreSommets;
+	fscanf(fichier, "%d", &NombreSommets);			//Nombre de sommets de la matrice
+	printf("%d \n", NombreSommets);
     return NombreSommets;
 }
 
@@ -44,11 +48,12 @@ Liste* LectureFichier(FILE* fichier, int NombreSommets){
 
 int main(){
 	int time = 0;
-	char *Chemin = "../Graphe/web1.txt";
+	char *Chemin = "../Graphe/Stanford.txt";
 	FILE* fichier = NULL;
 	fichier = fopen(Chemin, "r+");
 	if (fichier != NULL)
     {
+	int NombreArcs = NBarcs(fichier);
 	int NombreSommets = NBsommets(fichier);
 	Liste* tab = LectureFichier(fichier, NombreSommets);
 	afficherTableau(tab,NombreSommets);

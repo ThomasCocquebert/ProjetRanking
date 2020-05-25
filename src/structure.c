@@ -167,7 +167,6 @@ void freeSommet(Sommet* s) {
 
 void freeListe(Liste *l) {
 	if (l->first == NULL){
-		printf("HERE");
 		return;
 	}
 	Sommet* temp = NULL;
