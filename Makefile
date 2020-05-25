@@ -12,6 +12,10 @@ vector.o:	src/vector.c
 structure.o:	src/structure.c
 	$(CC) -Wall -g -c src/structure.c
 
+# Build lecture.o
+Lecture.o:	src/Lecture.c lib/structure.h
+	$(CC) -Wall -g -c src/Lecture.c
+
 # Build testVector.o
 testVector.o:	src/testVector.c lib/vector.h
 	$(CC) -Wall -g -c src/testVector.c -lm

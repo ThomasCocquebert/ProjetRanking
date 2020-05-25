@@ -1,7 +1,7 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include "time.h"
-#include "structure.c"
+#include "../lib/structure.h"
 
 int NBarcs(FILE* fichier){
 	int NombreArcs;
@@ -20,8 +20,6 @@ int NBsommets(FILE* fichier){
 
 Liste* LectureFichier(FILE* fichier, int NombreSommets){
 	
-    char caractereActuel;
-    int NombreArcs;
     int NumeroLigne;
     int NbArcsLigne;
     int Colonne;
@@ -46,6 +44,7 @@ Liste* LectureFichier(FILE* fichier, int NombreSommets){
      return tab;
 }
 
+/*
 int main(int argc, char *argv[]){
 	double temps = 0;
 	int tempsInit = clock();
@@ -74,3 +73,4 @@ int main(int argc, char *argv[]){
     }
     return 0;
 }
+*/
