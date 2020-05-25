@@ -1,5 +1,5 @@
 vector.o:	src/vector.c
-	gcc -Wall -g -c src/vector.c
+	gcc -Wall -g -c src/vector.c -lm
 
 testVector.o:	src/testVector.c lib/vector.h
 	gcc -Wall -g -c src/testVector.c

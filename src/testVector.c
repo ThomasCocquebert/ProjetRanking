@@ -16,7 +16,6 @@ int main(int argc, char** argv) {
 		exit(1);
 	}
 	printVEC(pi);
-	freeMemVEC(pi);
 
 	printf("Allocation of vector\n");
 	VEC* pi2 = malloc(sizeof(VEC));
@@ -30,6 +29,40 @@ int main(int argc, char** argv) {
 		exit(1);
 	}
 	printVEC(pi2);
+
+	switch(compVector(pi, pi2)) {
+		case 0:
+			printf("Difference between pi and pi2 > DELTA\n");
+			break;
+
+		case 1:
+			printf("Difference between pi and pi2 <= DELTA\n");
+			break;
+
+		default:
+			printf("Exit programm\n");
+			freeMemVEC(pi);
+			freeMemVEC(pi2);
+			exit(1);
+	}
+
+	switch(compVector(pi2, pi2)) {
+		case 0:
+			printf("Difference between pi and pi2 > DELTA\n");
+			break;
+
+		case 1:
+			printf("Difference between pi and pi2 <= DELTA\n");
+			break;
+
+		default:
+			printf("Exit programm\n");
+			freeMemVEC(pi);
+			freeMemVEC(pi2);
+			exit(1);
+	}
+
+	freeMemVEC(pi);
 	freeMemVEC(pi2);
 
 	exit(0);

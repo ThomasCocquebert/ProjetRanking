@@ -54,3 +54,4 @@ dkms.conf
 # Compile file
 test
 testVector
+testStructure
