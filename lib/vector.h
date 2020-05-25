@@ -1,3 +1,6 @@
+#ifndef VECTOR_H
+#define VECTOR_H
+
 /*
 Structure of vector
 int size is the number of element in the vector
@@ -31,3 +34,5 @@ Free the allocated memory for the vector
 Free the vector itself at the end
 */
 void freeMemVEC(VEC* vector);
+
+#endif
