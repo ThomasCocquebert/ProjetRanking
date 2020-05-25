@@ -13,11 +13,10 @@ struct Sommet
 typedef struct Liste Liste;
 struct Liste
 {	
-	Liste *suivant;
 	Sommet *first;
 	Sommet *last;
 };
-
+/*
 typedef struct Colonne Colonne;
 struct Colonne
 {
@@ -25,7 +24,7 @@ struct Colonne
 	Liste *last;
 	
 };
-
+*/
 
 Liste* initListe(){
 	Liste* l = malloc(sizeof(Liste));
@@ -33,12 +32,11 @@ Liste* initListe(){
 		printf("Erreur d'allocation liste\n");
 		exit(1);
 	}
-	l->suivant = NULL;
 	l->first = NULL;
 	l->last = NULL;
 	return l;
 }
-
+/*
 Colonne* initColonne(){
 	Colonne* c = malloc(sizeof(Colonne));
 	if (c == NULL) {
@@ -49,7 +47,7 @@ Colonne* initColonne(){
 	c->last = NULL;
 	return c;
 }
-
+*/
 Sommet* initSommet(int ligne,int colonne,double proba)
 {
 	Sommet* s = malloc(sizeof(Sommet));
@@ -60,11 +58,16 @@ Sommet* initSommet(int ligne,int colonne,double proba)
 	s->numLigne = ligne;
 	s->numColonne = colonne;
 	s->proba = proba;
+	s->suivant = NULL;
 	return s;
 }
 
 Liste* initTableau(int nb) {
 	Liste* tab = malloc(nb * sizeof(Liste));
+	for (int i = 0; i<nb; i++) {
+		tab[i].first = NULL;
+		tab[i].last = NULL;
+	}
 	if (tab == NULL) {
 		printf("Erreur allocation tableau");
 		exit(1);
@@ -86,7 +89,7 @@ void ajouterSommet(Liste *l,Sommet* s) {
 		}
 		
 	}
-	
+	/*
 void ajouterListe(Colonne* c,Liste *new) {
 	//si ajout sur liste vide:
 	if (c == NULL) {
@@ -107,7 +110,7 @@ void ajouterListe(Colonne* c,Liste *new) {
 		}
 		
 	}		
-	
+	*/
 	
 
 void afficherSommet(Sommet* s) {
@@ -130,7 +133,7 @@ void afficherListe(Liste* l) {
 		
 	}
 }
-
+/*
 void afficherColonne(Colonne* c) {
 	printf("****AFFICHAGE Colonne:\n");
 	//si liste vide
@@ -145,12 +148,17 @@ void afficherColonne(Colonne* c) {
 		}
 		
 	}
-}
+}*/
 
 void afficherTableau(Liste *tab, int taille) {
+	printf("=======AFFICHAGE TABLEAU=========\n\n");
 	for(int i = 0; i<taille; i++) {
+		printf("******n°colone :%d\n",i);
 		afficherListe(&tab[i]);
+		printf("******\n\n");
 	}
+	
+	printf("=================================\n\n");
 }
 
 void freeSommet(Sommet* s) {
@@ -159,55 +167,49 @@ void freeSommet(Sommet* s) {
 
 void freeListe(Liste *l) {
 	if (l->first == NULL){
-		free(l);
+		printf("HERE");
 		return;
 	}
-	Sommet* temp;
-	temp = l->first;
-	free(l->first);
-	while(temp != NULL) {
-		temp = temp->suivant;
-		free(temp->suivant);
+	Sommet* temp = NULL;
+	while(l->first->suivant != NULL) {
+		temp = l->first;
+		l->first = l->first->suivant;
+		free(temp);
 	}
+	free(l->first);
+	
 }
 
+void freeTableau(Liste * tab,int taille) {
+	for (int i = 0; i<taille; i++) {
+		freeListe(&tab[i]);
+	}
+	free(tab);
+	
+}
 
-
+/*
 int main(int argc, char** argv ){
+	int nombre = 3;
+
+	Liste* tab = initTableau(nombre);
 	
-	Liste* tab = initTableau(2);
+	Sommet* s1 = initSommet(2,1,0.7);
+	Sommet* s2 = initSommet(2,1,0.5);
 	
-	//~ printf("Hello world!\n");
-	//~ Liste* l = initListe();
-	//~ Liste* l2 = initListe();
-	//~ ajouterListe(c,l);
-	//~ ajouterListe(c,l2);
-	//~ l = initListe();
-	Sommet* s1 = initSommet(1,1,0.5);
-	Sommet* s2 = initSommet(2,1,0.7);
+	Sommet* s3 = initSommet(2,1,0.8);
+	Sommet* s4 = initSommet(2,1,0.88);
+	
 	ajouterSommet(&tab[0],s1);
 	ajouterSommet(&tab[0],s2);
 	
-	Sommet* s3 = initSommet(2,1,0.7);
-	Sommet* s4 = initSommet(2,1,0.7);
 	ajouterSommet(&tab[1],s3);
-	ajouterSommet(&tab[1],s4);
+	ajouterSommet(&tab[2],s4);
 	
-	afficherTableau(tab,2);
+	afficherTableau(tab,nombre);
+	freeTableau(tab,nombre);
 	
-	//~ afficherColonne(c);
-	//~ afficherListe(l);
-	//~ afficherListe(l2);
-	
-
-	//~ afficherSommet(s1);
-
-	//~ ajouterSommet(l,s2);
-	//~ ajouterSommet(l,s3);
-	//~ ajouterSommet(l,s4);
-	//~ freeListe(l);
-	
-	//~ afficherListe(l);
     return 0;
 	
 }
+*/
