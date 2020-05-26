@@ -75,11 +75,25 @@ int main(int argc, char** argv) {
 	printVEC(pi3);
 
 	VECByDouble(pi3, 0.5);
-
 	printVEC(pi3);
+	VECAddDouble(pi3, 0.05);
+	printVEC(pi3);
+
+	VEC* pi4 = malloc(sizeof(VEC));
+	if(pi4 == NULL) {
+		printf("\033[1;31m");
+		printf("Allocation failed for the vector\n");
+		printf("\033[0m");
+		exit(1);
+	}
+	if(!initVECe(pi4, 10)) {
+		exit(1);
+	}
+	printVEC(pi4);
 
 	freeMemVEC(pi);
 	freeMemVEC(pi2);
 	freeMemVEC(pi3);
+	freeMemVEC(pi4);
 	exit(0);
 }

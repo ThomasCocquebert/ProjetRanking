@@ -30,6 +30,14 @@ Return 1 if the allocation is successful or 0 if not
 int initVEC(VEC* vector, int size);
 
 /*
+Initialize the vector of size int size at 1
+vector : the vector to initiliazed
+size : the size of the vector to initialized
+Return 1 if the allocation is successful or 0 if not
+*/
+int initVECe(VEC* vector, int size);
+
+/*
 Print the vector with its size and its value
 vector : the vector to print
 */
@@ -64,4 +72,10 @@ mult : the double for the multiply
 */
 void VECByDouble(VEC* v, double mult);
 
+/*
+Add a double to a vector
+v : the vector for the addition
+add : the double to add
+*/
+void VECAddDouble(VEC* v, double add);
 #endif
