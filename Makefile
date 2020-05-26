@@ -49,9 +49,9 @@ runTestVector: testVector
 	./testVector
 
 # Run testVEctor with valgrind
-runTestVectorMemory: testVector
+runTestVectorValgrind: testVector
 	valgrind ./testVector
 
 # Clean .o files and executable
 clean :
-	rm *.o testVector calcul
+	rm *.o testVector testAlteration calcul
