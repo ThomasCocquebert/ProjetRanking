@@ -128,7 +128,7 @@ void VECAddDouble(VEC* v, double add) {
 
 void VECAddVector(VEC* v, VEC* v2){
 	int i;
-	for(i = 0; i < v->size; v++){
+	for(i = 0; i < v->size; i++){
 		v->array[i] = v->array[i] + v2->array[i];
 	}
 }
