@@ -101,7 +101,7 @@ int compVector(VEC* v1, VEC* v2) {
 	for(int i = 0; i < minus->size; i++) {
 		tmp += minus->array[i]*minus->array[i];
 	}
-	tmp = sqrt(tmp);
+	//~ tmp = sqrt(tmp);
 	if(tmp <= DELTA) {
 		printf("\033[1;32m");
 		printf("DELTA reached\n");
@@ -146,8 +146,12 @@ double Norme1(VEC* v){
 	int i;
 	double res = 0;
 	for(i = 0; i < v->size; i++){
+		if(v->array[i] < 0){
+			v->array[i] = v->array[i] * (-1);
+		}
 		res = res + v->array[i];
 	}
+	printf("res = %lf\n", res);
 	return res;
 }
 
@@ -160,12 +164,9 @@ VEC* Normalisation(VEC* v){
 	return v;
 }
 
-VEC* CopyVector(VEC* v){
-	VEC* v2 = malloc(sizeof(VEC));
-	initVECNull(v2, v->size);
+void CopyVector(VEC* v, VEC* v2){
 	int i;
 	for(i = 0; i < v->size; i++){
 		v2->array[i] = v->array[i];
 	}
-	return v2;
 }

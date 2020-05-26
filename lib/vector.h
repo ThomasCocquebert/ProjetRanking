@@ -111,7 +111,6 @@ VEC* Normalisation(VEC* v);
 /*
 Copy of a vector
 v : vector
-Return a VEC*
 */
-VEC* CopyVector(VEC* v);
+void CopyVector(VEC* v,VEC* v2);
 #endif

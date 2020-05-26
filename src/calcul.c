@@ -65,23 +65,26 @@ VEC* computePageRank(Liste *tab, VEC* x,int taille) {
 	
 	pageRank = computePiG(tab, x, taille);		//Partie 1 du calcul: alpha*x*P
 	VECByDouble(pageRank, 0.85);
-	printVEC(pageRank);
 	
 	F = computeF(tab,taille);			//Partie 2 du calcul: alpha*(x*ftransposé)*e
 	double scal = VxVt(x,F);
 	scal = scal * 0.85;
 	VECByDouble(Partie2, scal);
-	printVEC(Partie2);
 	
 	double je = 0.15;		//Partie 3 du calcul: (1-alpha)/N * e
 	je = je/taille;
 	VECByDouble(Partie3, je);
-	printVEC(Partie3);
 	
 	VECAddVector(pageRank, Partie2);	//Partie 1 + Partie 2
 	VECAddVector(pageRank, Partie3);	//Partie 1 + 2 + 3
-	printVEC(pageRank);
-	return pageRank;
+	//~ printVEC(pageRank);
+	
+	freeMemVEC(F);
+	freeMemVEC(Partie2);
+	freeMemVEC(Partie3);
+    CopyVector(pageRank, x);
+	freeMemVEC(pageRank);
+	return x;
 	
 }
 
@@ -90,18 +93,23 @@ void Convergence(Liste* tab, VEC* x, int taille){
 	double diff = 0;
 	VEC* tmp = malloc(sizeof(VEC));
 	initVECNull(tmp, taille);
+	VEC* ancientX = malloc(sizeof(VEC));
+	initVECNull(ancientX, taille);
 	do{
-		VEC* ancientX = malloc(sizeof(VEC));
-		initVECNull(ancientX, taille);
-		ancientX = CopyVector(x);
+		CopyVector(x, ancientX);
 		x = computePageRank(tab, x, taille);
 		tmp = minusVector(x, ancientX);
 		diff = Norme1(tmp);
-		printf("norme = %lf",diff);
+		//~ printf("norme = %lf",diff);
 		cpt++;
 	}while(diff >= 0.000001);
+	printf("Cpt = %d\n",cpt);
+	printVEC(x);
+	freeMemVEC(ancientX);
+	freeMemVEC(tmp);
 }
 
+/*
 int convergeTest(Liste* tab, int size) {
 	int nbIt = 0;
 	VEC* xNext = malloc(sizeof(VEC));
@@ -139,7 +147,7 @@ int convergeTest(Liste* tab, int size) {
 	printf("No convergence\n");
 	printf("\033[0m");
 	return 0;
-}
+}*/
 
 
 int main(int argc, char *argv[]) {
@@ -163,6 +171,7 @@ int main(int argc, char *argv[]) {
 	Convergence(tab, x, NombreSommets);
 	printf("Libération de la structure\n");
 	freeTableau(tab, NombreSommets);
+	free(x);
 	int tempsFin = clock();		//Temps d'execution du programme
 	temps = (float)(tempsFin-tempsInit)/CLOCKS_PER_SEC;
 	printf("\033[1;32m");
