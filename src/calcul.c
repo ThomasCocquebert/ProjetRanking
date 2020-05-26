@@ -60,6 +60,7 @@ int convergeTest(Liste* tab, int size) {
 			printf("Number of iteration before convergence : %d\n", nbIt);
 			printf("\033[0m");
 			freeMemVEC(xNext);
+			freeMemVEC(x);
 			return 1;
 		}
 		freeMemVEC(x);
@@ -72,6 +73,7 @@ int convergeTest(Liste* tab, int size) {
 	return 0;
 }
 
+
 int main(int argc, char *argv[]) {
 	printf("Check\n");
 	double temps = 0;
@@ -80,7 +82,6 @@ int main(int argc, char *argv[]) {
 	FILE* fichier = NULL;
 	printf("Check file\n");
 	fichier = fopen("Graphe/web1.txt", "r+");
-	fichier = fopen(Chemin, "r+");
 	if (fichier != NULL)
     {
 	printf("Lecture du graphe\n");

@@ -85,7 +85,6 @@ int compVector(VEC* v1, VEC* v2) {
 		tmp += minus->array[i]*minus->array[i];
 	}
 	tmp = sqrt(tmp);
-	printf("norm : %lf\n", tmp);
 	if(tmp <= DELTA) {
 		printf("\033[1;32m");
 		printf("DELTA reached\n");
