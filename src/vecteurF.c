@@ -2,14 +2,6 @@
 #include "stdio.h"
 
 
-Sommet * findSommetLigne(Liste * tab, int ligne) {
-	Sommet * temp = tab->first;
-	while (temp->numLigne!= ligne) {
-		temp = temp->suivant;
-	}
-	return temp;
-}
-
 VEC * computeF(Liste * tab, int taille) {
 	VEC* f = NULL;
 	int i = 0;
@@ -17,14 +9,15 @@ VEC * computeF(Liste * tab, int taille) {
 	double somme = 0;
 	initVECNull(f, taille); 
 	
-	//pour chaque ligne
+	//pour chaque colonne
 	for (i=0; i<taille; i++) {
-		//pour chaque colonne
-		for (j = 0; somme == 0; j++) {
-			somme += findSommetLigne(&tab[j],i)->proba;
-		}
-		if (somme == 0) {
+		//si pas délément ==> somme des probas = 0
+		if (tab[i]->first == NULL) {
 			f->array[i] = 1;
+		}
+		//elément ==> somme des probas > 0
+		else {
+			f->array[i] = 0;
 		}
 		
 	}
