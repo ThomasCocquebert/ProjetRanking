@@ -51,10 +51,10 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
-# Compile file
-test
+# Executable files
+testAlteration
+testCalcul
 testVector
-testStructure
 
 # Useless graph
 Graphe/in-2004v2.txt

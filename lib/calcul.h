@@ -5,7 +5,7 @@
 Compute the F vector for the List tab
 tab : the List of Sommet
 taille : the size of the vector f
-Return the pointer of vector
+Return the pointer of vector or NULL if allocation failed
 */
 VEC * computeF(Liste * tab, int taille);
 
@@ -14,16 +14,25 @@ Compute the operation pi multiple by matrix tab
 tab : the Liste of Sommet
 pi : the vector to multiply
 size : the size of vector
-Return an address of VEC
+Return an address of VEC or NULL if allocation failed
 */
 VEC* computePiG(Liste* tab, VEC* pi, int size);
 
 /*
-Test the convergence of the matrix
+Compute the PageRank formula
 tab : the Liste of Sommet
-size : the size of the vector pi
-Return -1 if error during allocation of vectors, 0 if no convergence, 1 if not
+x : the vector
+size : the size of the vector
+Return the address of the new vector x or NULL if allocation failed
 */
-int convergeTest(Liste* tab, int size);
+VEC* PageRank(Liste* tab, VEC* x, int size);
+
+/*
+Test if the matrix converge in 1000 iterations or less
+tab : the Liste of Sommet
+x : the vector
+taille : the size of the vector
+*/
+void Convergence(Liste* tab, VEC* x, int taille);
 
 #endif
