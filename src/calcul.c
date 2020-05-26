@@ -59,7 +59,7 @@ int main(int argc, char *argv[]) {
 	int tempsFin = clock();		//Temps d'execution du programme
 	temps = (float)(tempsFin-tempsInit)/CLOCKS_PER_SEC;
 	printf("\033[1;32m");
-    printf("Temps d'execution = %lf ms\n", temps);
+    printf("Temps d'execution = %lf s\n", temps);
 	printf("\033[0m");
 	}
     else
