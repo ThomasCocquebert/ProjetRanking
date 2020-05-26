@@ -49,7 +49,8 @@ VEC* computePiG(Liste* tab, VEC* pi, int size) {
 	return res;
 }
 
-VEC* computePageRank(Liste *tab, VEC* x,int taille) {
+VEC* computePageRank(Liste *tab, VEC* x,int taille,VEC* v) {
+	CopyVector(x,v);
 	
 	VEC* pageRank = malloc(sizeof(VEC));
 	initVECNull(pageRank,taille);
@@ -63,9 +64,11 @@ VEC* computePageRank(Liste *tab, VEC* x,int taille) {
 	VEC* Partie3 = malloc(sizeof(VEC));
 	initVECe(Partie3,taille);
 	
+	free(pageRank);
 	pageRank = computePiG(tab, x, taille);		//Partie 1 du calcul: alpha*x*P
 	VECByDouble(pageRank, 0.85);
 	
+	free(F);
 	F = computeF(tab,taille);			//Partie 2 du calcul: alpha*(x*ftransposé)*e
 	double scal = VxVt(x,F);
 	scal = scal * 0.85;
@@ -82,22 +85,29 @@ VEC* computePageRank(Liste *tab, VEC* x,int taille) {
 	freeMemVEC(F);
 	freeMemVEC(Partie2);
 	freeMemVEC(Partie3);
-    CopyVector(pageRank, x);
+    CopyVector(pageRank, v);
 	freeMemVEC(pageRank);
-	return x;
+	return v;
 	
 }
 
 void Convergence(Liste* tab, VEC* x, int taille){
+
 	int cpt = 0;
 	double diff = 0;
 	VEC* tmp = malloc(sizeof(VEC));
 	initVECNull(tmp, taille);
+	
+	VEC* v = malloc(sizeof(VEC));
+	initVECNull(v, taille);
+	
 	VEC* ancientX = malloc(sizeof(VEC));
 	initVECNull(ancientX, taille);
 	do{
 		CopyVector(x, ancientX);
-		x = computePageRank(tab, x, taille);
+		freeMemVEC(x);
+		x = computePageRank(tab, ancientX, taille,v);
+		freeMemVEC(tmp);
 		tmp = minusVector(x, ancientX);
 		diff = Norme1(tmp);
 		//~ printf("norme = %lf",diff);
@@ -107,6 +117,7 @@ void Convergence(Liste* tab, VEC* x, int taille){
 	printVEC(x);
 	freeMemVEC(ancientX);
 	freeMemVEC(tmp);
+	freeMemVEC(v);
 }
 
 /*
@@ -167,11 +178,11 @@ int main(int argc, char *argv[]) {
 	//~ convergeTest(tab, NombreSommets);
 	VEC* x = malloc(sizeof(VEC));
 	initVEC(x, NombreSommets);
-	//computePageRank(tab, x, NombreSommets);
+	//~ computePageRank(tab, x, NombreSommets);
 	Convergence(tab, x, NombreSommets);
 	printf("Libération de la structure\n");
 	freeTableau(tab, NombreSommets);
-	free(x);
+	freeMemVEC(x);
 	int tempsFin = clock();		//Temps d'execution du programme
 	temps = (float)(tempsFin-tempsInit)/CLOCKS_PER_SEC;
 	printf("\033[1;32m");
