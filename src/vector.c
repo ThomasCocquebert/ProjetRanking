@@ -125,3 +125,12 @@ void VECAddDouble(VEC* v, double add) {
 		v->array[i] += add;
 	}
 }
+
+double VxVt(VEC *v1, VEC *v2){
+	double res = 0;
+	int i;
+	for(i = 0; i < v1->size; i++){
+		res = res + (v1->array[1] * v2->array[2]);
+	}
+	return res;
+}

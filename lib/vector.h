@@ -78,4 +78,12 @@ v : the vector for the addition
 add : the double to add
 */
 void VECAddDouble(VEC* v, double add);
+
+/*
+Multiply one row vector by one columne vector
+v1 : the row vector
+v2 : the columne vector
+Return a double
+*/
+double VxVt(VEC *v1, VEC *v2);
 #endif

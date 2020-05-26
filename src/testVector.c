@@ -91,9 +91,25 @@ int main(int argc, char** argv) {
 	}
 	printVEC(pi4);
 
+	VEC* pi5 = malloc(sizeof(VEC));
+	if(pi5 == NULL) {
+		printf("\033[1;31m");
+		printf("Allocation failed for the vector\n");
+		printf("\033[0m");
+		exit(1);
+	}
+	if(!initVEC(pi5, 10)) {
+		exit(1);
+	}
+	printVEC(pi5);
+
+	printf("V2 * e = %lf\n", VxVt(pi2, pi4));
+
 	freeMemVEC(pi);
 	freeMemVEC(pi2);
 	freeMemVEC(pi3);
 	freeMemVEC(pi4);
+	freeMemVEC(pi5);
+
 	exit(0);
 }
