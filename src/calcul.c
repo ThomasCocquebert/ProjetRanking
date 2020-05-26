@@ -3,7 +3,7 @@
 #include "time.h"
 #include "../lib/vector.h"
 #include "../lib/structure.h"
-#include "../lib/Lecture.h"
+#include "../lib/lecture.h"
 
 VEC* computePiG(Liste* tab, VEC* pi, int size) {
 	double tmp = 0.0;
@@ -80,6 +80,7 @@ int main(int argc, char *argv[]) {
 	FILE* fichier = NULL;
 	printf("Check file\n");
 	fichier = fopen("Graphe/web1.txt", "r+");
+	fichier = fopen(Chemin, "r+");
 	if (fichier != NULL)
     {
 	printf("Lecture du graphe\n");
@@ -92,7 +93,7 @@ int main(int argc, char *argv[]) {
 	int tempsFin = clock();		//Temps d'execution du programme
 	temps = (float)(tempsFin-tempsInit)/CLOCKS_PER_SEC;
 	printf("\033[1;32m");
-    printf("Temps d'execution = %lf ms\n", temps);
+    printf("Temps d'execution = %lf s\n", temps);
 	printf("\033[0m");
 	}
     else
