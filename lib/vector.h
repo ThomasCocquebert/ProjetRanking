@@ -1,6 +1,6 @@
 #ifndef VECTOR_H
 #define VECTOR_H
-#define DELTA 0.0000001
+#define DELTA 0.000001
 
 /*
 Structure of vector

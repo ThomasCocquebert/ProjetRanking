@@ -42,4 +42,4 @@ runTestVectorMemory: testVector
 
 # Clean .o files and executable
 clean :
-	rm *.o testVector
+	rm *.o testVector calcul
