@@ -100,4 +100,11 @@ v : vector
 Return a VEC*
 */
 VEC* Normalisation(VEC* v);
+
+/*
+Copy of a vector
+v : vector
+Return a VEC*
+*/
+VEC* CopyVector(VEC* v);
 #endif
