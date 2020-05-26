@@ -55,6 +55,7 @@ dkms.conf
 testAlteration
 testCalcul
 testVector
+main
 
 # Useless graph
 Graphe/in-2004v2.txt

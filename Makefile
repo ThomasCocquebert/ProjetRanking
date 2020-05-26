@@ -66,10 +66,21 @@ allTest:	testVector testAlteration testCalcul
 	$(CC) -Wall -g -o testCalcul testCalcul.o vector.o structure.o lecture.o calcul.o -lm
 
 #############################################
-# Build main programm
+# Build main.o file
+main.o:	src/main.c lib/*.h
+	$(CC) -Wall -g -c src/main.c -lm
+
+#############################################
+# Build main executable
+main:	main.o vector.o structure.o lecture.o alteration.o calcul.o
+	$(CC) -Wall -g -o main main.o vector.o structure.o lecture.o alteration.o calcul.o -lm
 
 #############################################
 # Run executable
+
+# Run main
+runMain:	main
+	./main
 
 # Run testVector executable
 runTestVector: testVector
@@ -86,6 +97,10 @@ runTestCalcul:	testCalcul
 #############################################
 # Run executables with Valgrind
 
+# Run main executable with Valgrind
+runMainVal:	main
+	valgrind ./main Graphe/web1.txt
+
 # Run testVector executable with Valgrind
 runTestVectorVal: testVector
 	valgrind ./testVector
@@ -100,6 +115,10 @@ runTestCalculVal:	testCalcul
 
 #############################################
 # Run executable with drmemory
+
+# Run main executable with drMemory
+runMainDr:	main
+	drmemory.exe main.exe Graphe/web1.txt
 
 # Run testVector executable with deMemory
 runTestVectorDr: testVector
@@ -118,5 +137,5 @@ runTestCalculDr:	testCalcul
 
 # Clean .o files and executable
 clean :
-	rm *.o testVector testAlteration testCalcul
+	rm *.o testVector testAlteration testCalcul main
 
