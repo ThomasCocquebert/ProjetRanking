@@ -126,6 +126,13 @@ void VECAddDouble(VEC* v, double add) {
 	}
 }
 
+void VECAddVector(VEC* v, VEC* v2){
+	int i;
+	for(i = 0; i < v->size; v++){
+		v->array[i] = v->array[i] + v2->array[i];
+	}
+}
+
 double VxVt(VEC *v1, VEC *v2){
 	double res = 0;
 	int i;
@@ -154,7 +161,8 @@ VEC* Normalisation(VEC* v){
 }
 
 VEC* CopyVector(VEC* v){
-	VEC* v2 = initVECNull(v2, v->size);
+	VEC* v2 = malloc(sizeof(VEC));
+	initVECNull(v2, v->size);
 	int i;
 	for(i = 0; i < v->size; i++){
 		v2->array[i] = v->array[i];

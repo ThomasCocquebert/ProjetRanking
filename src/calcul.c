@@ -49,49 +49,43 @@ VEC* computePiG(Liste* tab, VEC* pi, int size) {
 	return res;
 }
 
-VEC* computePageRank(Liste * tab, VEC* x,int taille) {
-	VEC* pageRank = NULL;
-	initVECNull(pageRank,pageRank);
-	
-	VEC* ancientX;
-	VEC* aXp = NULL;
-	
-	VEC* scalaire1 = NULL;
-	initVECe(scalaire1,taille);
-	VEC* scalaire2 = NULL;
-	initVECe(scalaire2,taille);
-	VECByDouble(scalaire2,0.15/taille);
-	
-	VEC* e = NULL;
-	initVECe(e,taille);
-	
-	double xFt;
-	do {
-		
-		free(pageRank);
-		initVECe(pageRank,taille);
-		xFt = VxVt(x,computeF(tab,taille));
-		//premiere partie
-		computePiG(tab,x,taille);
-		VECByDouble(aXp, 0.85);
-		
-		//deuxieme partie
-		
-		freeMemVEC(scalaire1);
-		initVECe(scalaire1,taille);
-		VECByDouble(scalaire1,0.85*xFt);
-		
-		//calcul
-		VEC=
-
-			
-	}
-	while( compVector(ancientX, pageRank) == 0);
-	
-	
+VEC* computePageRank(Liste *tab, VEC* x,int taille) {
+	printf("Test1\n");
+	VEC* pageRank = malloc(sizeof(VEC));
+	initVECNull(pageRank,taille);
+	printf("Test1.1\n");
+	VEC* ancientX = malloc(sizeof(VEC));
+	initVECNull(ancientX, taille);
+	printf("Test1.12\n");
+	ancientX = CopyVector(x);
+	printf("Test1.2\n");
+	VEC* F = malloc(sizeof(VEC));
+	initVECe(F,taille);
+	printf("Test1.3\n");
+	VEC* Partie2 = malloc(sizeof(VEC));
+	initVECe(Partie2,taille);
+	VEC* Partie3 = malloc(sizeof(VEC));
+	initVECe(Partie3,taille);
+	printf("Test2\n");
+	pageRank = computePiG(tab, x, taille);		//Partie 1 du calcul: alpha*x*P
+	VECByDouble(pageRank, 0.85);
+	printf("Test3\n");
+	F = computeF(tab,taille);			//Partie 2 du calcul: alpha*(x*ftransposé)*e
+	double scal = VxVt(x,F);
+	scal = scal * 0.85;
+	VECByDouble(Partie2, scal);
+	printf("Test4\n");
+	double je = 0.25;		//Partie 3 du calcul: (1-alpha)/N * e
+	je = je/taille;
+	VECByDouble(Partie3, je);
+	printf("Test5\n");
+	VECAddVector(pageRank, Partie2);	//Partie 1 + Partie 2
+	VECAddVector(pageRank, Partie3);	//Partie 1 + 2 + 3
+	printf("Test6\n");
 	return pageRank;
 	
 }
+
 int convergeTest(Liste* tab, int size) {
 	int nbIt = 0;
 	VEC* xNext = malloc(sizeof(VEC));
@@ -146,7 +140,10 @@ int main(int argc, char *argv[]) {
 	int NombreArcs = NBarcs(fichier);
 	int NombreSommets = NBsommets(fichier);
 	Liste* tab = LectureFichier(fichier, NombreSommets);
-	convergeTest(tab, NombreSommets);
+	//~ convergeTest(tab, NombreSommets);
+	VEC* x = malloc(sizeof(VEC));
+	initVEC(x, NombreSommets);
+	computePageRank(tab, x, NombreSommets);
 	printf("Libération de la structure\n");
 	freeTableau(tab, NombreSommets);
 	int tempsFin = clock();		//Temps d'execution du programme

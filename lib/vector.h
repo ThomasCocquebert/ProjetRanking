@@ -80,6 +80,13 @@ add : the double to add
 void VECAddDouble(VEC* v, double add);
 
 /*
+ Add two vector
+ v : the first vector
+ v2 : the second vector
+ */
+void VECAddVector(VEC* v, VEC* v2);
+
+/*
 Multiply one row vector by one columne vector
 v1 : the row vector
 v2 : the columne vector
