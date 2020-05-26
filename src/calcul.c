@@ -47,8 +47,8 @@ int main(int argc, char *argv[]) {
 	printf("Lecture du graphe\n");
 	int NombreArcs = NBarcs(fichier);
 	int NombreSommets = NBsommets(fichier);
-	//~ Liste* tab = LectureFichier(fichier, NombreSommets);
-	afficherTableau(tab, NombreSommets);
+	Liste* tab = LectureFichier(fichier, NombreSommets);
+	//~ afficherTableau(tab, NombreSommets);
 	VEC* pi = malloc(sizeof(VEC));
 	initVEC(pi, NombreSommets);
 	VEC* pi2 = computePiG(tab, pi, NombreSommets);
