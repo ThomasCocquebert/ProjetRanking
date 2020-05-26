@@ -1,6 +1,8 @@
 #include "stdlib.h"
 #include "stdio.h"
+#include "../lib/structure.h"
 
+/*
 typedef struct Sommet Sommet;
 struct Sommet
 {
@@ -17,6 +19,7 @@ struct Liste
 	Sommet *first;
 	Sommet *last;
 };
+*/
 /*
 typedef struct Colonne Colonne;
 struct Colonne
@@ -33,7 +36,6 @@ Liste* initListe(){
 		printf("Erreur d'allocation liste\n");
 		exit(1);
 	}
-	l->exist = 1;
 	l->first = NULL;
 	l->last = NULL;
 	return l;
@@ -69,6 +71,7 @@ Liste* initTableau(int nb) {
 	for (int i = 0; i<nb; i++) {
 		tab[i].first = NULL;
 		tab[i].last = NULL;
+		tab[i].exist = 1;
 	}
 	if (tab == NULL) {
 		printf("Erreur allocation tableau");

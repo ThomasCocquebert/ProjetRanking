@@ -24,6 +24,18 @@ testVector.o:	src/testVector.c lib/vector.h
 calcul.o:	src/calcul.c lib/vector.h lib/structure.h lib/lecture.h
 	$(CC) -Wall -g -c src/calcul.c -lm
 
+# Build alteration.o
+alteration.o:	src/alteration.c lib/structure.h
+	$(CC) -Wall -g -c src/alteration.c
+
+# Build testAlteration.o
+testAlteration.o: src/testAlteration.c lib/alteration.h lib/structure.h
+	$(CC) -Wall -g -c src/testAlteration.c
+
+# Build testAlteration executable
+testAlteration:	testAlteration.o alteration.o structure.o Lecture.o
+	$(CC) -Wall -g -o testAlteration testAlteration.o alteration.o structure.o Lecture.o
+
 # Build testVector executable
 testVector:	testVector.o vector.o
 	$(CC) -Wall -g -o testVector vector.o testVector.o -lm
