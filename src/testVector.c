@@ -103,7 +103,7 @@ int main(int argc, char** argv) {
 	}
 	printVEC(pi5);
 
-	printf("V2 * e = %lf\n", VxVt(pi2, pi4));
+	printf("V2 * e = %lf\n", VxVt(pi2, pi4 r));
 
 	freeMemVEC(pi);
 	freeMemVEC(pi2);

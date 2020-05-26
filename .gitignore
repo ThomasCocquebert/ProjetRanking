@@ -65,3 +65,6 @@ Graphe/wb-edu.txt
 Graphe/wikipedia-20051105V2.txt
 Graphe/wikipedia.txt
 Graphe/StanfordV2.txt
+
+# PDF files
+*.pdf

@@ -4,6 +4,23 @@
 #include "../lib/vector.h"
 #include "../lib/structure.h"
 #include "../lib/lecture.h"
+#include "../lib/calcul.h"
+
+VEC * computeF(Liste * tab, int taille) {
+	VEC* f = NULL;
+	int i = 0;
+	int j = 0;
+	double somme = 0;
+	initVECNull(f, taille); 
+	
+	for (i=0; i<taille; i++) {
+		if (tab[i]->first == NULL) {
+			f->array[i] = 1;
+		}
+	}
+	
+	return f;
+}
 
 VEC* computePiG(Liste* tab, VEC* pi, int size) {
 	double tmp = 0.0;
