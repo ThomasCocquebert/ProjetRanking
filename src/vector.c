@@ -34,6 +34,23 @@ int initVEC(VEC* vector, int size) {
 	return 1;
 }
 
+int initVECe(VEC* vector, int size) {
+	int i = 0;
+	vector->size = size;
+	vector->array = malloc(sizeof(double) * vector->size);
+	if(vector->array == NULL) {
+		printf("\033[1;31m");
+		printf("Allocation of VEC->array failed\n");
+		printf("\033[0m");
+		free(vector);
+		return 0;
+	}
+	for(i = 0; i < vector->size; i++) {
+		vector->array[i] = 1.0;
+	}
+	return 1;
+}
+
 void printVEC(VEC* vector) {
 	int i =0;
 	printf("~~~~~~~~~~ Printing Vector ~~~~~~~~~~\n");
@@ -94,5 +111,17 @@ int compVector(VEC* v1, VEC* v2) {
 	} else {
 		freeMemVEC(minus);
 		return 0;
+	}
+}
+
+void VECByDouble(VEC* v, double mult) {
+	for(int i = 0; i < v->size; i++) {
+		v->array[i] = mult * v->array[i];
+	}
+}
+
+void VECAddDouble(VEC* v, double add) {
+	for(int i = 0; i < v->size; i++) {
+		v->array[i] += add;
 	}
 }
