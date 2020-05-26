@@ -96,3 +96,9 @@ int compVector(VEC* v1, VEC* v2) {
 		return 0;
 	}
 }
+
+void VECByDouble(VEC* v, double mult) {
+	for(int i = 0; i < v->size; i++) {
+		v->array[i] = mult * v->array[i];
+	}
+}

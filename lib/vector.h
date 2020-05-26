@@ -57,4 +57,11 @@ Return 1 if true, 0 if false, -1 if the two vectors has a different size
 */
 int compVector(VEC* v1, VEC* v2);
 
+/*
+Multiply a vector by a double
+v : the vector to multiply
+mult : the double for the multiply
+*/
+void VECByDouble(VEC* v, double mult);
+
 #endif
