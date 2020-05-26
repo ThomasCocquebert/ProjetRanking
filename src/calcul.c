@@ -49,6 +49,16 @@ VEC* computePiG(Liste* tab, VEC* pi, int size) {
 	return res;
 }
 
+VEC* CopyVector(VEC* v){
+	VEC* v2;
+	v2->size = v->size;
+	int i;
+	for(i = 0; i < v->size; i++){
+		v2->array[i] = v->array[i];
+	}
+	return v2;
+}
+
 VEC* computePageRank(Liste * tab, VEC* x,int taille) {
 	VEC* pageRank = NULL;
 	initVECNull(pageRank,pageRank);
