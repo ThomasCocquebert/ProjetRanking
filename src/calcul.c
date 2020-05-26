@@ -9,12 +9,10 @@
 VEC * computeF(Liste * tab, int taille) {
 	VEC* f = NULL;
 	int i = 0;
-	int j = 0;
-	double somme = 0;
 	initVECNull(f, taille); 
 	
 	for (i=0; i<taille; i++) {
-		if (tab[i]->first == NULL) {
+		if (tab[i].first == NULL) {
 			f->array[i] = 1;
 		}
 	}
@@ -51,6 +49,49 @@ VEC* computePiG(Liste* tab, VEC* pi, int size) {
 	return res;
 }
 
+VEC* computePageRank(Liste * tab, VEC* x,int taille) {
+	VEC* pageRank = NULL;
+	initVECNull(pageRank,pageRank);
+	
+	VEC* ancientX;
+	VEC* aXp = NULL;
+	
+	VEC* scalaire1 = NULL;
+	initVECe(scalaire1,taille);
+	VEC* scalaire2 = NULL;
+	initVECe(scalaire2,taille);
+	VECByDouble(scalaire2,0.15/taille);
+	
+	VEC* e = NULL;
+	initVECe(e,taille);
+	
+	double xFt;
+	do {
+		
+		free(pageRank);
+		initVECe(pageRank,taille);
+		xFt = VxVt(x,computeF(tab,taille));
+		//premiere partie
+		computePiG(tab,x,taille);
+		VECByDouble(aXp, 0.85);
+		
+		//deuxieme partie
+		
+		freeMemVEC(scalaire1);
+		initVECe(scalaire1,taille);
+		VECByDouble(scalaire1,0.85*xFt);
+		
+		//calcul
+		VEC=
+
+			
+	}
+	while( compVector(ancientX, pageRank) == 0);
+	
+	
+	return pageRank;
+	
+}
 int convergeTest(Liste* tab, int size) {
 	int nbIt = 0;
 	VEC* xNext = malloc(sizeof(VEC));
