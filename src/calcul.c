@@ -41,13 +41,14 @@ int main(int argc, char *argv[]) {
 	int tempsInit = clock();
 	char *Chemin = argv[1];
 	FILE* fichier = NULL;
-	fichier = fopen("Graphe/web1.txt", "r+");
+	fichier = fopen(Chemin, "r+");
 	if (fichier != NULL)
     {
 	printf("Lecture du graphe\n");
 	int NombreArcs = NBarcs(fichier);
 	int NombreSommets = NBsommets(fichier);
-	Liste* tab = LectureFichier(fichier, NombreSommets);
+	//~ Liste* tab = LectureFichier(fichier, NombreSommets);
+	afficherTableau(tab, NombreSommets);
 	VEC* pi = malloc(sizeof(VEC));
 	initVEC(pi, NombreSommets);
 	VEC* pi2 = computePiG(tab, pi, NombreSommets);
