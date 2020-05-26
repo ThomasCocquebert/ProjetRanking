@@ -3,7 +3,7 @@
 #include "time.h"
 #include "../lib/vector.h"
 #include "../lib/structure.h"
-#include "../lib/Lecture.h"
+#include "../lib/lecture.h"
 
 VEC* computePiG(Liste* tab, VEC* pi, int size) {
 	double tmp = 0.0;

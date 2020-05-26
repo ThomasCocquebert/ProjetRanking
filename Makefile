@@ -21,7 +21,7 @@ testVector.o:	src/testVector.c lib/vector.h
 	$(CC) -Wall -g -c src/testVector.c -lm
 
 # Build calcul.o
-calcul.o:	src/calcul.c lib/vector.h lib/structure.h lib/Lecture.h
+calcul.o:	src/calcul.c lib/vector.h lib/structure.h lib/lecture.h
 	$(CC) -Wall -g -c src/calcul.c -lm
 
 # Build testVector executable
