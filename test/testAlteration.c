@@ -19,11 +19,10 @@ int main() {
 	printf("Nb Arc : %d\n", NombreArcs);
 	printf("Nb Sommets : %d\n", NombreSommets);
 	Liste* tab = LectureFichier(fichier, NombreSommets);
-	//~ afficherTableau(tab,NombreSommets);
 	delColumn(tab, NombreSommets);
 	printf("Libération de la structure\n");
 	freeTableau(tab, NombreSommets);
-	int tempsFin = clock();		//Temps d'execution du programme
+	int tempsFin = clock();
 	temps = (float)(tempsFin-tempsInit)/CLOCKS_PER_SEC;
 	printf("\033[1;32m");
     printf("Temps d'execution = %lf ms\n", temps);

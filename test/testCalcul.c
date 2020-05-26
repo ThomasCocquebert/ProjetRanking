@@ -22,16 +22,12 @@ int main(int argc, char **argv) {
 	printf("Nb Arc : %d\n", NombreArcs);
 	printf("Nb Sommets : %d\n", NombreSommets);
 	Liste* tab = LectureFichier(fichier, NombreSommets);
-	//~ convergeTest(tab, NombreSommets);
 	VEC* x = malloc(sizeof(VEC));
 	initVEC(x, NombreSommets);
-	//VEC* pr = PageRank(tab, x, NombreSommets);
-	//printVEC(pr);
 	Convergence(tab, x, NombreSommets);
 	printf("Libération de la structure\n");
 	freeTableau(tab, NombreSommets);
-	//freeMemVEC(pr);
-	int tempsFin = clock();		//Temps d'execution du programme
+	int tempsFin = clock();
 	temps = (float)(tempsFin-tempsInit)/CLOCKS_PER_SEC;
 	printf("\033[1;32m");
     printf("Temps d'execution = %lf s\n", temps);
