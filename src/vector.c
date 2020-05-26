@@ -154,7 +154,7 @@ VEC* Normalisation(VEC* v){
 }
 
 VEC* CopyVector(VEC* v){
-	VEC* v2;
+	VEC* v2 = initVECNull;
 	v2->size = v->size;
 	int i;
 	for(i = 0; i < v->size; i++){
