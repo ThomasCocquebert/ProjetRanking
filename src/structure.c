@@ -13,6 +13,7 @@ struct Sommet
 typedef struct Liste Liste;
 struct Liste
 {	
+	int exist;
 	Sommet *first;
 	Sommet *last;
 };
@@ -32,6 +33,7 @@ Liste* initListe(){
 		printf("Erreur d'allocation liste\n");
 		exit(1);
 	}
+	l->exist = 1;
 	l->first = NULL;
 	l->last = NULL;
 	return l;
