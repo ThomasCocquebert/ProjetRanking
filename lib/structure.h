@@ -25,6 +25,7 @@ last : the adress of the last Sommet
 typedef struct Liste Liste;
 struct Liste
 {	
+	int exist;
 	Sommet *first;
 	Sommet *last;
 };
