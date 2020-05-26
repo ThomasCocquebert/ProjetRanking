@@ -86,4 +86,18 @@ v2 : the columne vector
 Return a double
 */
 double VxVt(VEC *v1, VEC *v2);
+
+/*
+Get ||v||1
+v : vector
+Return a double
+*/
+double Norme1(VEC* v);
+
+/*
+Normalization of v
+v : vector
+Return a VEC*
+*/
+VEC* Normalisation(VEC* v);
 #endif

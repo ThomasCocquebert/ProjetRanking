@@ -134,3 +134,21 @@ double VxVt(VEC *v1, VEC *v2){
 	}
 	return res;
 }
+
+double Norme1(VEC* v){
+	int i;
+	double res = 0;
+	for(i = 0; i < v->size; i++){
+		res = res + v->array[i];
+	}
+	return res;
+}
+
+VEC* Normalisation(VEC* v){
+	int i;
+	double Norme = Norme1(v);
+	for(i = 0; i < v->size; i++){
+		v->array[i] = v->array[i] / Norme;
+	}
+	return v;
+}
