@@ -1,6 +1,9 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 #define DELTA 1e-6
+#ifndef STRUCTURE_H
+	# include "structure.h"
+#endif
 
 /*
 Structure of vector

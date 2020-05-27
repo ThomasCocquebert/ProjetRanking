@@ -1,5 +1,11 @@
 #ifndef CALCUL_H
 #define CALCUL_H
+#ifndef STRUCTURE_H
+	# include "structure.h"
+#endif
+#ifndef VECTOR_H
+	# include "vector.h"
+#endif
 
 /*
 Compute the F vector for the List tab

@@ -1,5 +1,8 @@
 #ifndef ALTERATION_H
 #define ALTERATION_H
+#ifndef STRUCTURE_H
+	# include "structure.h"
+#endif
 
 /*
 Generated a random number between 0 and 99
