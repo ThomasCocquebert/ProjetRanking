@@ -242,7 +242,6 @@ void Convergence(Liste* tab, VEC* x, int taille){
 		xPrec = x;
 		x = PageRank(tab, x, taille);
 		if(x == NULL) {
-			freeMemVEC(xPrec);
 			freeMemVEC(x);
 			printf("\033[1;31m");
 			printf("x uninitialized with PageRank\n");
@@ -255,7 +254,6 @@ void Convergence(Liste* tab, VEC* x, int taille){
 			printf("\033[1;32m");
 			printf("Converge at it %d\n", i);
 			printf("\033[0m");
-			freeMemVEC(x);
 			freeMemVEC(xPrec);
 			return;
 		} else if( respComp == -1) {
@@ -263,7 +261,6 @@ void Convergence(Liste* tab, VEC* x, int taille){
 			printf("respComp = -1\n");
 			printf("Error in Convergence\n");
 			printf("\033[0m");
-			freeMemVEC(x);
 			freeMemVEC(xPrec);
 			return;
 		}
@@ -273,5 +270,4 @@ void Convergence(Liste* tab, VEC* x, int taille){
 	printf("\033[1;31m");
 	printf("No convergence\n");
 	printf("\033[0m");
-	freeMemVEC(x);
 }

@@ -269,7 +269,7 @@ int NewVector(VEC* Vnew, VEC* Vold, Liste* tab){
 		printf("VEC* Vold uninitialized\n");
 		printf("Error in NewVector\n");
 		printf("\033[0m");
-		return NULL;
+		return 0;
 	}
 	int i;
 	int cpt = 0;
