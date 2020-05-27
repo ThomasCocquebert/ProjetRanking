@@ -8,6 +8,7 @@
 
 VEC* computeF(Liste *tab, int taille) {
 	int i = 0;
+	int cpt = 0;
 	VEC* f = malloc(sizeof(VEC));
 	if(f == NULL) {
 		printf("\033[1;31m");
@@ -25,10 +26,14 @@ VEC* computeF(Liste *tab, int taille) {
 		return NULL;
 	} 
 	for (i=0; i<taille; i++) {
-		if (tab[i].first == NULL) {
+		while(tab[cpt].exist == 0){
+			cpt++;
+		}
+		if (tab[cpt].first == NULL) {
 			f->array[i] = 1;
 		}
-	}
+		cpt++;
+		}
 	return f;
 }
 
