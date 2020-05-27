@@ -33,6 +33,7 @@ VEC* computeF(Liste *tab, int taille) {
 }
 
 VEC* computePiG(Liste* tab, VEC* pi, int size) {
+	int cptTab = 0;
 	double tmp = 0.0;
 	Sommet* copy;
 	VEC* res = malloc(sizeof(VEC));
@@ -51,6 +52,24 @@ VEC* computePiG(Liste* tab, VEC* pi, int size) {
 		printf("\033[0m");
 		return NULL;
 	}
+
+	for(int i = 0; i < size; i++) {
+		while(tab[cptTab].exist == 0) {
+			cptTab++;
+		}
+		if(tab[cptTab].first != NULL) {
+			copy = tab[cptTab].first;
+			while(tab[cptTab].first != NULL) {
+				tmp += tab[cptTab].first->proba * pi->array[tab[cptTab].first->numLigne];
+				tab[cptTab].first = tab[cptTab].first->suivant;
+			}
+		}
+		res->array[i] = tmp;
+		tmp = 0.0;
+		tab[cptTab].first = copy;
+		cptTab++;
+	}
+	/*
 	for(int i = 0; i < size; i++) {
 		if(tab[i].first != NULL) {
 			copy = tab[i].first;
@@ -63,6 +82,7 @@ VEC* computePiG(Liste* tab, VEC* pi, int size) {
 			tab[i].first = copy;
 		}
 	}
+	*/
 	return res;
 }
 
