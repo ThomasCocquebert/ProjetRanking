@@ -26,11 +26,13 @@ VEC* computeF(Liste *tab, int taille) {
 		return NULL;
 	} 
 	for (i=0; i<taille; i++) {
-		if (tab[i].exist == 1){
-			if (tab[i].first == NULL) {
-				f->array[cpt] = 1;
-			}
+		while(tab[cpt].exist == 0){
 			cpt++;
+		}
+		if (tab[cpt].first == NULL) {
+			f->array[i] = 1;
+		}
+		cpt++;
 		}
 	}
 	return f;
