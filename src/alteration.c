@@ -48,7 +48,7 @@ int delLigne(Liste *tab, int ligne,int taille) {
 			
 			if (temp->numLigne == ligne && tempPrec != temp) {
 				//~ printf("TEMPPREC\n");
-				afficherSommet(tempPrec);
+				//afficherSommet(tempPrec);
 				tempPrec->suivant = temp->suivant;
 				
 				//si on est arriveé au dernier élément, on modifie le last de la liste
@@ -88,7 +88,7 @@ int delColumn(Liste* tab, int size) {
 	int j = 0;
 	for(int i = 0; i < size; i++) {
 		if(testDel()) {
-			printf("Delete column %d.\n",i);
+			//printf("Delete column %d.\n",i);
 			j++;
 			freeListe(&tab[i]);
 			tab[i].first = NULL;

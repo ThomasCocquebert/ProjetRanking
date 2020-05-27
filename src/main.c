@@ -83,10 +83,24 @@ int main(int argc, char** argv) {
 		freeTableau(tab, NombreSommets);
 		exit(1);
 	}
-	printf("Fin de calcul du 1er PageRank\n");
+	printf("Fin du 1er PageRank\n");
 	tempsFinTask = clock();
 	temps = (float)(tempsFinTask-tempsInitTask)/CLOCKS_PER_SEC;
-	printf("Temps 1er PageRank : %lf\n\n", temps);
+	printf("Temps du 1er PageRank : %lf\n\n", temps);
+
+	// ##################################################
+
+	// ##################################################
+	// Modification Graphe
+
+	tempsInitTask = clock();
+	printf("Début des modifications du graphe\n");
+	int nouveauSommets = NombreSommets - (delColumn(tab, NombreSommets));
+	printf("Fin des modifications du graphe\n");
+	tempsFinTask = clock();
+	temps = (float)(tempsFinTask-tempsInitTask)/CLOCKS_PER_SEC;
+	printf("Temps de modification du graphe : %lf\n\n", temps);
+
 
 	// ##################################################
 
@@ -94,11 +108,13 @@ int main(int argc, char** argv) {
 	// Désallocation mémoire
 
 	tempsInitTask = clock();
+	printf("Début de la désallocation mémoire\n");
 	freeTableau(tab, NombreSommets);
 	freeMemVEC(x);
+	printf("Fin de la désallocation mémoire\n");
 	tempsFinTask = clock();
 	temps = (float)(tempsFinTask-tempsInitTask)/CLOCKS_PER_SEC;
-	printf("Temps désallocation mémoire : %lf\n", temps);
+	printf("Temps de désallocation mémoire : %lf\n", temps);
 
 	// ##################################################
 
@@ -109,6 +125,11 @@ int main(int argc, char** argv) {
 	temps = (float)(tempsFin-tempsInit)/CLOCKS_PER_SEC;
 	printf("Durée totale d'exécution : %lf\n", temps);
 	exit(0);
+
+	// ##################################################
+
+	// ##################################################
+	// Comm
 
 	// ##################################################
 }

@@ -238,7 +238,7 @@ VEC* PageRank(Liste* tab, VEC* x, int size) {
 VEC* Convergence(Liste* tab, VEC* x, int taille){
 	VEC* xPrec = NULL;
 	for(int i = 0; i < 1000; i++) {
-		printf("Compute iteration %d\n", i);
+		//printf("Compute iteration %d\n", i);
 		xPrec = x;
 		x = PageRank(tab, x, taille);
 		if(x == NULL) {
