@@ -13,6 +13,7 @@ int main(int argc, char** argv) {
 	//Setup des variables et ouverture du fichier
 
 	time_t tempsInit = clock();
+	srand(time(0));
 	if (argc == 1) {
 		printf("\033[1;31m");
 		printf("Veuillez spécifier un graphe à ouvrir\n");
@@ -95,7 +96,8 @@ int main(int argc, char** argv) {
 
 	tempsInitTask = clock();
 	printf("Début des modifications du graphe\n");
-	int nouveauSommets = NombreSommets - (delColumn(tab, NombreSommets));
+	int nbDelSommets = delColumn(tab, NombreSommets);
+	printf("Nombre de sommets supprimés : %d\n", nbDelSommets);
 	printf("Fin des modifications du graphe\n");
 	tempsFinTask = clock();
 	temps = (float)(tempsFinTask-tempsInitTask)/CLOCKS_PER_SEC;

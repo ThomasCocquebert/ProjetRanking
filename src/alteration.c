@@ -165,10 +165,10 @@ int delColumn(Liste* tab, int size) {
 		if(testDel()) {
 			//~ printf("Delete column %d.\n",i);
 			j++;
-			freeListe(&tab[i]);
-			tab[i].first = NULL;
+			//freeListe(&tab[i]);
+			//tab[i].first = NULL;
 			tab[i].exist = 0;
-			delLigne2(tab, i, size);
+			//delLigne2(tab, i, size);
 		}
 	}
 	return j;

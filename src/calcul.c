@@ -31,6 +31,18 @@ VEC* computeF(Liste *tab, int taille) {
 		}
 		if (tab[cpt].first == NULL) {
 			f->array[i] = 1;
+		} else {
+			Sommet* origin;
+			Sommet* copy;
+			origin = tab[cpt].first;
+			copy = tab[cpt].first;
+			while(tab[copy->numColonne].exist == 0 && copy->suivant != NULL) {
+				copy = copy->suivant;
+			}
+			if(tab[copy->numColonne].exist == 0) {
+				f->array[i] = 1;
+				tab[cpt].first = origin;
+			}
 		}
 		cpt++;
 		}
@@ -65,7 +77,9 @@ VEC* computePiG(Liste* tab, VEC* pi, int size) {
 		if(tab[cptTab].first != NULL) {
 			copy = tab[cptTab].first;
 			while(tab[cptTab].first != NULL) {
-				tmp += tab[cptTab].first->proba * pi->array[tab[cptTab].first->numLigne];
+				if(tab[tab[cptTab].first->numColonne].exist == 1) {
+					tmp += tab[cptTab].first->proba * pi->array[tab[cptTab].first->numLigne];
+				}
 				tab[cptTab].first = tab[cptTab].first->suivant;
 			}
 			res->array[i] = tmp;
