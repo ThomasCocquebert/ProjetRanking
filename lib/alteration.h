@@ -21,4 +21,13 @@ size : the size of the tab
 Return the number of deleted column or -1 if tab is uninitialized
 */
 int delColumn(Liste* tab, int size);
+
+
+/*
+Delete all element Sommet link to a specific line of each column.
+* tab : the array of List representing the matrix
+* ligne : the line number
+* taille : size of the matrix
+ */
+int delLigne(Liste* tab, int ligne, int taille);
 #endif
