@@ -68,26 +68,12 @@ VEC* computePiG(Liste* tab, VEC* pi, int size) {
 				tmp += tab[cptTab].first->proba * pi->array[tab[cptTab].first->numLigne];
 				tab[cptTab].first = tab[cptTab].first->suivant;
 			}
-		}
-		res->array[i] = tmp;
-		tmp = 0.0;
-		tab[cptTab].first = copy;
-		cptTab++;
-	}
-	/*
-	for(int i = 0; i < size; i++) {
-		if(tab[i].first != NULL) {
-			copy = tab[i].first;
-			while(tab[i].first != NULL) {
-				tmp += tab[i].first->proba * pi->array[tab[i].first->numLigne];
-				tab[i].first = tab[i].first->suivant;
-			}
 			res->array[i] = tmp;
 			tmp = 0.0;
-			tab[i].first = copy;
+			tab[cptTab].first = copy;
 		}
+		cptTab++;
 	}
-	*/
 	return res;
 }
 

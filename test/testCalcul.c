@@ -10,7 +10,7 @@ int main(int argc, char **argv) {
 	double temps = 0;
 	int tempsInit = clock();
 	FILE* fichier = NULL;
-	fichier = fopen("Graphe/web1.txt", "r+");
+	fichier = fopen("Graphe/wb-cs-stanford.txt", "r+");
 	if (fichier != NULL)
     {
 	printf("Lecture du graphe\n");
