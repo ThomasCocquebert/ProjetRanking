@@ -1,8 +1,8 @@
 #include "stdlib.h"
 #include "stdio.h"
 #include "time.h"
-#include "../lib/vector.h"
 #include "../lib/structure.h"
+#include "../lib/vector.h"
 #include "../lib/lecture.h"
 #include "../lib/calcul.h"
 

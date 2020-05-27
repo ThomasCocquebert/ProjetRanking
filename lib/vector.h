@@ -1,7 +1,6 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 #define DELTA 1e-6
-#include "../lib/structure.h"
 
 /*
 Structure of vector

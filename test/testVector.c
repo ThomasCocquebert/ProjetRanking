@@ -1,5 +1,6 @@
 #include "stdlib.h"
 #include "stdio.h"
+#include "../lib/structure.h"
 #include "../lib/vector.h"
 
 

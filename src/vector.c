@@ -1,8 +1,8 @@
 #include "stdlib.h"
 #include "stdio.h"
 #include "math.h"
-#include "../lib/vector.h"
 #include "../lib/structure.h"
+#include "../lib/vector.h"
 
 int initVECNull(VEC* vector, int size) {
 	if(vector == NULL) {

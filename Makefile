@@ -12,13 +12,13 @@ LINK=gcc
 #############################################
 # Build of .o files
 
-# Build vector.o
-vector.o:	src/vector.c lib/structure.h
-	$(CC) -Wall -g -c src/vector.c -lm
-
 # Build structure.o
 structure.o:	src/structure.c
 	$(CC) -Wall -g -c src/structure.c
+
+# Build vector.o
+vector.o:	src/vector.c lib/structure.h
+	$(CC) -Wall -g -c src/vector.c -lm
 
 # Build lecture.o
 lecture.o:	src/lecture.c lib/structure.h
@@ -29,7 +29,7 @@ alteration.o:	src/alteration.c lib/structure.h
 	$(CC) -Wall -g -c src/alteration.c
 
 # Build calcul.o
-calcul.o:	src/calcul.c lib/vector.h lib/structure.h lib/lecture.h
+calcul.o:	src/calcul.c lib/structure.h lib/vector.h lib/lecture.h
 	$(CC) -Wall -g -c src/calcul.c -lm
 
 
@@ -37,46 +37,46 @@ calcul.o:	src/calcul.c lib/vector.h lib/structure.h lib/lecture.h
 # Build Test .o files
 
 # Build testVector.o
-testVector.o:	test/testVector.c lib/vector.h lib/structure.h
+testVector.o:	test/testVector.c lib/structure.h lib/vector.h
 	$(CC) -Wall -g -c test/testVector.c -lm
 
 # Build testAlteration.o
-testAlteration.o: test/testAlteration.c lib/alteration.h lib/structure.h
+testAlteration.o: test/testAlteration.c lib/structure.h lib/alteration.h
 	$(CC) -Wall -g -c test/testAlteration.c
 
 # Build testCalcul.o
-testCalcul.o:	test/testCalcul.c lib/vector.h lib/structure.h lib/lecture.h lib/calcul.h
+testCalcul.o:	test/testCalcul.c lib/structure.h lib/vector.h lib/lecture.h lib/calcul.h
 	$(CC) -Wall -g -c test/testCalcul.c -lm
 
 #############################################
 # Build Test executables
 
 # Build testVector executable
-testVector:	testVector.o vector.o structure.o
-	$(CC) -Wall -g -o testVector vector.o testVector.o structure.o -lm
+testVector:	testVector.o structure.o vector.o
+	$(CC) -Wall -g -o testVector testVector.o structure.o vector.o -lm
 
 # Build testAlteration executable
-testAlteration:	testAlteration.o alteration.o structure.o lecture.o
-	$(CC) -Wall -g -o testAlteration testAlteration.o alteration.o structure.o lecture.o
+testAlteration:	testAlteration.o structure.o alteration.o lecture.o
+	$(CC) -Wall -g -o testAlteration testAlteration.o structure.o alteration.o lecture.o
 
 # Build testCalcul executable
-testCalcul:	testCalcul.o vector.o structure.o lecture.o calcul.o
-	$(CC) -Wall -g -o testCalcul testCalcul.o vector.o structure.o lecture.o calcul.o -lm
+testCalcul:	testCalcul.o structure.o vector.o lecture.o calcul.o
+	$(CC) -Wall -g -o testCalcul testCalcul.o structure.o vector.o lecture.o calcul.o -lm
 
 allTest:	testVector testAlteration testCalcul
-	$(CC) -Wall -g -o testVector vector.o testVector.o structure.o -lm
-	$(CC) -Wall -g -o testAlteration testAlteration.o alteration.o structure.o lecture.o
-	$(CC) -Wall -g -o testCalcul testCalcul.o vector.o structure.o lecture.o calcul.o -lm
+	$(CC) -Wall -g -o testVector  testVector.o structure.o vector.o -lm
+	$(CC) -Wall -g -o testAlteration testAlteration.o structure.o alteration.o lecture.o
+	$(CC) -Wall -g -o testCalcul testCalcul.o structure.o vector.o lecture.o calcul.o -lm
 
 #############################################
 # Build main.o file
-main.o:	src/main.c lib/*.h
+main.o:	src/main.c lib/structure.h lib/vector.h lib/lecture.h lib/calcul.h lib/alteration.h
 	$(CC) -Wall -g -c src/main.c -lm
 
 #############################################
 # Build main executable
-main:	main.o vector.o structure.o lecture.o alteration.o calcul.o
-	$(CC) -Wall -g -o main main.o vector.o structure.o lecture.o alteration.o calcul.o -lm
+main:	main.o structure.o vector.o lecture.o alteration.o calcul.o
+	$(CC) -Wall -g -o main main.o structure.o vector.o lecture.o alteration.o calcul.o -lm
 
 #############################################
 # Run executable
@@ -140,12 +140,12 @@ runTestCalculDr:	testCalcul
 
 # Build all executable files
 all:	main testVector testAlteration testCalcul
-	$(CC) -Wall -g -o testVector vector.o testVector.o -lm
-	$(CC) -Wall -g -o testAlteration testAlteration.o alteration.o structure.o lecture.o
-	$(CC) -Wall -g -o testCalcul testCalcul.o vector.o structure.o lecture.o calcul.o -lm
-	$(CC) -Wall -g -o main main.o vector.o structure.o lecture.o alteration.o calcul.o -lm
+	$(CC) -Wall -g -o testVector  testVector.o structure.o vector.o -lm
+	$(CC) -Wall -g -o testAlteration testAlteration.o structure.o alteration.o lecture.o
+	$(CC) -Wall -g -o testCalcul testCalcul.o structure.o vector.o lecture.o calcul.o -lm
+	$(CC) -Wall -g -o main main.o structure.o vector.o lecture.o alteration.o calcul.o -lm
 
 # Clean .o files and executable
 clean :
-	rm *.o testVector testAlteration testCalcul main
+	@rm *.o testVector testAlteration testCalcul main
 
