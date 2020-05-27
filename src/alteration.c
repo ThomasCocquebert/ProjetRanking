@@ -9,7 +9,7 @@ int genNumber() {
 }
 
 int testDel() {
-	if(genNumber() < 30) {
+	if(genNumber() == 0) {
 		return 1;
 	}
 	return 0;
@@ -47,7 +47,7 @@ int delLigne(Liste *tab, int ligne,int taille) {
 			
 			
 			if (temp->numLigne == ligne && tempPrec != temp) {
-				printf("TEMPPREC\n");
+				//~ printf("TEMPPREC\n");
 				afficherSommet(tempPrec);
 				tempPrec->suivant = temp->suivant;
 				
@@ -58,6 +58,12 @@ int delLigne(Liste *tab, int ligne,int taille) {
 			
 				temp->suivant = NULL;
 				freeSommet(temp);
+			}
+			else if (temp->numLigne == ligne){
+				free(temp);
+				tab[i].first = NULL;
+				tab[i].last = NULL;
+				
 			}
 			
 				
