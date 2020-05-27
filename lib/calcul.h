@@ -38,7 +38,8 @@ Test if the matrix converge in 1000 iterations or less
 tab : the Liste of Sommet
 x : the vector
 taille : the size of the vector
+Return the adress of the vector during the convergenece or NULL if error
 */
-void Convergence(Liste* tab, VEC* x, int taille);
+VEC* Convergence(Liste* tab, VEC* x, int taille);
 
 #endif

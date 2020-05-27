@@ -147,5 +147,5 @@ all:	main testVector testAlteration testCalcul
 
 # Clean .o files and executable
 clean :
-	@rm *.o testVector testAlteration testCalcul main
+	rm *.o testVector testAlteration testCalcul main
 

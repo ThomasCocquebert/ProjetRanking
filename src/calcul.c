@@ -235,34 +235,35 @@ VEC* PageRank(Liste* tab, VEC* x, int size) {
 	return piG;
 }
 
-void Convergence(Liste* tab, VEC* x, int taille){
+VEC* Convergence(Liste* tab, VEC* x, int taille){
 	VEC* xPrec = NULL;
 	for(int i = 0; i < 1000; i++) {
-		printf("Compute iteration N°%d\n", i);
+		printf("Compute iteration %d\n", i);
 		xPrec = x;
 		x = PageRank(tab, x, taille);
 		if(x == NULL) {
-			freeMemVEC(x);
 			printf("\033[1;31m");
 			printf("x uninitialized with PageRank\n");
 			printf("Error in Convergence\n");
 			printf("\033[0m");
-			return;
+			freeMemVEC(xPrec);
+			return NULL;
 		}
 		int respComp = compVector(x, xPrec);
 		if(respComp == 1) {
 			printf("\033[1;32m");
-			printf("Converge at it %d\n", i);
+			printf("Converge at iteration %d\n", i);
 			printf("\033[0m");
 			freeMemVEC(xPrec);
-			return;
+			return x;
 		} else if( respComp == -1) {
 			printf("\033[1;31m");
 			printf("respComp = -1\n");
 			printf("Error in Convergence\n");
 			printf("\033[0m");
 			freeMemVEC(xPrec);
-			return;
+			freeMemVEC(x);
+			return NULL;
 		}
 		freeMemVEC(xPrec);
 		xPrec = NULL;
@@ -270,4 +271,6 @@ void Convergence(Liste* tab, VEC* x, int taille){
 	printf("\033[1;31m");
 	printf("No convergence\n");
 	printf("\033[0m");
+	freeMemVEC(x);
+	return NULL;
 }
