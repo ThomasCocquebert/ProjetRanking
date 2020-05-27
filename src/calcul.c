@@ -34,7 +34,6 @@ VEC* computeF(Liste *tab, int taille) {
 		}
 		cpt++;
 		}
-	}
 	return f;
 }
 
