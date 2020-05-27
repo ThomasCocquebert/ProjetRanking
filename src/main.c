@@ -70,7 +70,7 @@ int main(int argc, char** argv) {
 	}
 	if(!initVEC(x, NombreSommets)) {
 		printf("\033[1;31m");
-		printf("Initialisation du vecteur x échouéen");
+		printf("Initialisation du vecteur x échouée");
 		printf("\033[0m");
 		freeTableau(tab, NombreSommets);
 		free(x);
@@ -107,12 +107,52 @@ int main(int argc, char** argv) {
 	// ##################################################
 
 	// ##################################################
+	// Calcul du second PageRank
+
+	tempsInitTask = clock();
+	printf("Calcul du 2ème PageRank\n");
+	VEC* x2 = malloc(sizeof(VEC));
+	if(x2 == NULL) {
+		printf("\033[1;31m");
+		printf("Allocation du vecteur x2 échouée\n");
+		printf("\033[0m");
+		freeMemVEC(x);
+		freeTableau(tab, NombreSommets);
+		exit(1);
+	}
+	if(!initVEC(x2, NombreSommets-nbDelSommets)) {
+		printf("\033[1;31m");
+		printf("Initialisation du vecteur x2 échouée");
+		printf("\033[0m");
+		freeTableau(tab, NombreSommets);
+		freeMemVEC(x);
+		free(x2);
+		exit(1);
+	}
+	x2 = Convergence(tab, x2, NombreSommets-nbDelSommets);
+	if(x2 == NULL) {
+		printf("\033[1;31m");
+		printf("La convergence n'a pas abouti\n");
+		printf("\033[0m");
+		freeMemVEC(x);
+		freeTableau(tab, NombreSommets);
+		exit(1);
+	}
+	printf("Fin du 2ème PageRank\n");
+	tempsFinTask = clock();
+	temps = (float)(tempsFinTask-tempsInitTask)/CLOCKS_PER_SEC;
+	printf("Temps du 2ème PageRank : %lf\n\n", temps);
+
+	// ##################################################
+
+	// ##################################################
 	// Désallocation mémoire
 
 	tempsInitTask = clock();
 	printf("Début de la désallocation mémoire\n");
 	freeTableau(tab, NombreSommets);
 	freeMemVEC(x);
+	freeMemVEC(x2);
 	printf("Fin de la désallocation mémoire\n");
 	tempsFinTask = clock();
 	temps = (float)(tempsFinTask-tempsInitTask)/CLOCKS_PER_SEC;
