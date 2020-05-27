@@ -1,6 +1,7 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 #define DELTA 1e-6
+#include "../lib/structure.h"
 
 /*
 Structure of vector
@@ -105,7 +106,7 @@ Vold : old Vector
 tab : Graph
 Return 1 if the functon end properly or 0 if an error occured
 */
-int NewVector(VEC* Vnew, VEC* Vold, Liste* tab)
+int NewVector(VEC* Vnew, VEC* Vold, Liste* tab);
 
 /*
 Get ||v||1
