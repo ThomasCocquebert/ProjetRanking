@@ -262,6 +262,26 @@ double VxVt(VEC *v1, VEC *v2){
 	return res;
 }
 
+int NewVector(VEC* Vnew, VEC* Vold, Liste* tab){
+	if(Vold == NULL) {
+		printf("\033[1;31m");
+		printf("VEC* Vold uninitialized\n");
+		printf("Error in NewVector\n");
+		printf("\033[0m");
+		return NULL;
+	}
+	int i;
+	int cpt = 0;
+	for(i = 0; i < Vold->size; i++){
+		while(tab[cpt].exist == 0){
+			cpt++;
+		}
+		Vnew->array[i] = Vold->array[cpt];
+		cpt++;
+	}
+	return 1;
+}
+
 double Norme1(VEC* v){
 	if(v == NULL) {
 		printf("\033[1;31m");

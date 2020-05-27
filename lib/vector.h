@@ -99,6 +99,15 @@ Return the multiplication of v1 by v2
 double VxVt(VEC *v1, VEC *v2);
 
 /*
+Get the new vector for the loop
+Vnew : new vector
+Vold : old Vector
+tab : Graph
+Return 1 if the functon end properly or 0 if an error occured
+*/
+int NewVector(VEC* Vnew, VEC* Vold, Liste* tab)
+
+/*
 Get ||v||1
 v : vector
 Return the norm1 of v
