@@ -9,7 +9,7 @@ int genNumber() {
 }
 
 int testDel() {
-	if(genNumber() == 0) {
+	if(genNumber() <10) {
 		return 1;
 	}
 	return 0;
@@ -55,12 +55,14 @@ int delLigne(Liste *tab, int ligne,int taille) {
 				if (temp->suivant == NULL) {
 					tab[i].last = tempPrec;
 				}
-			
+				
 				temp->suivant = NULL;
 				freeSommet(temp);
+				
 			}
 			else if (temp->numLigne == ligne){
-				free(temp);
+				temp->suivant = NULL;
+				freeSommet(temp);
 				tab[i].first = NULL;
 				tab[i].last = NULL;
 				
@@ -71,11 +73,71 @@ int delLigne(Liste *tab, int ligne,int taille) {
 			
 		
 	}
-	
 	return 1;
 	
 	
 }
+
+
+void deleteSommet(Liste* liste, int ligne) {
+	
+	if (liste == NULL) {
+		return;
+	}	
+	else if ( liste->first == NULL) {
+		return;
+	}
+	
+	Sommet* tmp = liste->first;
+	Sommet* prec = liste->first;
+	//on trouve le sommet à supprimer
+	while (tmp->numLigne != ligne && tmp->suivant!=NULL) {
+		prec = tmp;
+		tmp = tmp->suivant;
+	}
+	
+	if (tmp->numLigne == ligne) {
+		//pas arrivé à la fin
+		if (tmp->suivant!= NULL) {
+			prec->suivant = tmp->suivant;
+			tmp->suivant = NULL;
+			free(tmp);
+		}
+		//arrivé à la fin mais pas qu'un seul élément ds la liste
+		else if (tmp->suivant == NULL 
+					&& tmp!=liste->first) {
+			liste->last = prec;
+			free(tmp);
+			
+		}
+		//qu'un seul élément dans la liste
+		else if (tmp->suivant == NULL 
+					&& tmp==liste->first) {
+			liste->last = NULL;
+			liste->first = NULL;
+			free(tmp);
+			
+		}
+	}
+	
+}
+int delLigne2(Liste *tab, int ligne, int taille) {
+	if(tab == NULL) {
+		printf("\033[1;31m");
+		printf("tab uninitialized\n");
+		printf("Error in delColumn\n");
+		printf("\033[0m");
+		return -1;
+	}
+	
+	for (int i = 0; i<taille; i++) {
+		deleteSommet(&tab[i],ligne);
+	}
+	
+	return 0;
+	
+}
+
 
 int delColumn(Liste* tab, int size) {
 	if(tab == NULL) {
@@ -88,12 +150,12 @@ int delColumn(Liste* tab, int size) {
 	int j = 0;
 	for(int i = 0; i < size; i++) {
 		if(testDel()) {
-			//printf("Delete column %d.\n",i);
+			printf("Delete column %d.\n",i);
 			j++;
 			freeListe(&tab[i]);
 			tab[i].first = NULL;
 			tab[i].exist = 0;
-			delLigne(tab, i, size);
+			delLigne2(tab, i, size);
 		}
 	}
 	return j;
