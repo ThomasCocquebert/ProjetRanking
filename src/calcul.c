@@ -25,7 +25,7 @@ VEC* computeF(Liste *tab, int taille) {
 		printf("\033[0m");
 		return NULL;
 	} 
-	for (i=0; i<taille; i++) {
+	for (i = 0; i < taille; i++) {
 		while(tab[cpt].exist == 0){
 			cpt++;
 		}
