@@ -13,7 +13,7 @@ LINK=gcc
 # Build of .o files
 
 # Build vector.o
-vector.o:	src/vector.c
+vector.o:	src/vector.c lib/structure.h
 	$(CC) -Wall -g -c src/vector.c -lm
 
 # Build structure.o
@@ -37,7 +37,7 @@ calcul.o:	src/calcul.c lib/vector.h lib/structure.h lib/lecture.h
 # Build Test .o files
 
 # Build testVector.o
-testVector.o:	test/testVector.c lib/vector.h
+testVector.o:	test/testVector.c lib/vector.h lib/structure.h
 	$(CC) -Wall -g -c test/testVector.c -lm
 
 # Build testAlteration.o
@@ -52,8 +52,8 @@ testCalcul.o:	test/testCalcul.c lib/vector.h lib/structure.h lib/lecture.h lib/c
 # Build Test executables
 
 # Build testVector executable
-testVector:	testVector.o vector.o
-	$(CC) -Wall -g -o testVector vector.o testVector.o -lm
+testVector:	testVector.o vector.o structure.o
+	$(CC) -Wall -g -o testVector vector.o testVector.o structure.o -lm
 
 # Build testAlteration executable
 testAlteration:	testAlteration.o alteration.o structure.o lecture.o
@@ -64,7 +64,7 @@ testCalcul:	testCalcul.o vector.o structure.o lecture.o calcul.o
 	$(CC) -Wall -g -o testCalcul testCalcul.o vector.o structure.o lecture.o calcul.o -lm
 
 allTest:	testVector testAlteration testCalcul
-	$(CC) -Wall -g -o testVector vector.o testVector.o -lm
+	$(CC) -Wall -g -o testVector vector.o testVector.o structure.o -lm
 	$(CC) -Wall -g -o testAlteration testAlteration.o alteration.o structure.o lecture.o
 	$(CC) -Wall -g -o testCalcul testCalcul.o vector.o structure.o lecture.o calcul.o -lm
 
