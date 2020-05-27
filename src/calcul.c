@@ -11,12 +11,17 @@ VEC* computeF(Liste *tab, int taille) {
 	VEC* f = malloc(sizeof(VEC));
 	if(f == NULL) {
 		printf("\033[1;31m");
-		printf("Allocation of VEC failed\n");
+		printf("Allocation of VEC* f failed\n");
+		printf("Error in computeF\n");
 		printf("\033[0m");
 		return NULL;
 	}
 	if(!initVECNull(f, taille)) {
 		free(f);
+		printf("\033[1;31m");
+		printf("Initialization of VEC* f failed\n");
+		printf("Error in computeF\n");
+		printf("\033[0m");
 		return NULL;
 	} 
 	for (i=0; i<taille; i++) {
@@ -33,12 +38,17 @@ VEC* computePiG(Liste* tab, VEC* pi, int size) {
 	VEC* res = malloc(sizeof(VEC));
 	if(res == NULL) {
 		printf("\033[1;31m");
-		printf("Allocation of VEC failed\n");
+		printf("Allocation of VEC* res failed\n");
+		printf("Error in computePiG\n");
 		printf("\033[0m");
 		return NULL;
 	}
 	if(!initVECNull(res, size)) {
 		free(res);
+		printf("\033[1;31m");
+		printf("Allocation of VEC* res failed\n");
+		printf("Error in computePiG\n");
+		printf("\033[0m");
 		return NULL;
 	}
 	for(int i = 0; i < size; i++) {
@@ -63,54 +73,146 @@ VEC* PageRank(Liste* tab, VEC* x, int size) {
 	VEC* e1 = malloc(sizeof(VEC));
 	if(e1 == NULL) {
 		printf("\033[1;31m");
-		printf("Allocation of VEC failed\n");
+		printf("Allocation of VEC* e1 failed\n");
+		printf("Error in PageRank\n");
 		printf("\033[0m");
 		return NULL;
 	}
 	if(!initVECe(e1, size)) {
 		free(e1);
+		printf("\033[1;31m");
+		printf("Initialization of VEC* e1 failed\n");
+		printf("Error in PageRank\n");
+		printf("\033[0m");
 		return NULL;
 	}
 	VEC* e2 = malloc(sizeof(VEC));
 	if(e2 == NULL) {
 		printf("\033[1;31m");
-		printf("Allocation of VEC failed\n");
+		printf("Allocation of VEC* e2 failed\n");
+		printf("Error in PageRank\n");
 		printf("\033[0m");
 		return NULL;
 	}
 	if(!initVECe(e2, size)) {
+		freeMemVEC(e1);
 		free(e2);
+		printf("\033[1;31m");
+		printf("Initialization of VEC* e2 failed\n");
+		printf("Error in PageRank\n");
+		printf("\033[0m");
 		return NULL;
 	}
 	VEC* ft = computeF(tab, size);
+	if(ft == NULL) {
+		freeMemVEC(e1);
+		freeMemVEC(e2);
+		printf("\033[1;31m");
+		printf("Initialization of VEC* ft failed\n");
+		printf("Error in PageRank\n");
+		printf("\033[0m");
+	}
 	VEC* xTmp = malloc(sizeof(VEC));
 	if(xTmp == NULL) {
 		printf("\033[1;31m");
-		printf("Allocation of VEC failed\n");
+		printf("Allocation of VEC* xTmp failed\n");
+		printf("Error in PageRank\n");
 		printf("\033[0m");
 		return NULL;
 	}
 	if(!initVECNull(xTmp, size)) {
+		freeMemVEC(e1);
+		freeMemVEC(e2);
+		freeMemVEC(ft);
 		free(xTmp);
+		printf("\033[1;31m");
+		printf("Initialization of VEC* xTmp failed\n");
+		printf("Error in PageRank\n");
+		printf("\033[0m");
 		return NULL;
 	}
-	CopyVector(x, xTmp);
+	if(!CopyVector(x, xTmp)) {
+		freeMemVEC(e1);
+		freeMemVEC(e2);
+		freeMemVEC(ft);
+		freeMemVEC(xTmp);
+		printf("\033[1;31m");
+		printf("Copy of x in xTmp failed\n");
+		printf("Error in PageRank\n");
+		printf("\033[0m");
+		return NULL;
+	}
 
 	//First part of the PageRank equation
 	VEC* piG = computePiG(tab, x, size);
+	if(piG == NULL) {
+		freeMemVEC(e1);
+		freeMemVEC(e2);
+		freeMemVEC(ft);
+		freeMemVEC(xTmp);
+		printf("\033[1;31m");
+		printf("Initialization of VEC* piG failed\n");
+		printf("Error in PageRank\n");
+		printf("\033[0m");
+		return NULL;
+	}
 	VECByDouble(piG, alpha);
 
 	//Second part of the PageRank equation
 	mult2 = VxVt(xTmp, ft);
 	mult2 = alpha * mult2;
-	VECByDouble(e1, mult2);
+	if(!VECByDouble(e1, mult2)) {
+		freeMemVEC(e1);
+		freeMemVEC(e2);
+		freeMemVEC(ft);
+		freeMemVEC(xTmp);
+		freeMemVEC(piG);
+		printf("\033[1;31m");
+		printf("VECByDouble(e1,mult2) failed\n");
+		printf("Error in PageRank\n");
+		printf("\033[0m");
+		return NULL;
+	}
 
 	//Third part of the PageRank equation
-	VECByDouble(e2, mult3);
+	if(!VECByDouble(e2, mult3)) {
+		freeMemVEC(e1);
+		freeMemVEC(e2);
+		freeMemVEC(ft);
+		freeMemVEC(xTmp);
+		freeMemVEC(piG);
+		printf("\033[1;31m");
+		printf("VECByDouble(e2,mult3) failed\n");
+		printf("Error in PageRank\n");
+		printf("\033[0m");
+		return NULL;
+	}
 
 	//Addition of all part and stored the result in piG vector
-	VECAddVector(e1, e2);
-	VECAddVector(piG, e2);
+	if(!VECAddVector(e1, e2)) {
+		freeMemVEC(e1);
+		freeMemVEC(e2);
+		freeMemVEC(ft);
+		freeMemVEC(xTmp);
+		freeMemVEC(piG);
+		printf("\033[1;31m");
+		printf("VECAddVector(e1,e2) failed\n");
+		printf("Error in PageRank\n");
+		printf("\033[0m");
+		return NULL;
+	}
+	if(!VECAddVector(piG, e2)) {
+		freeMemVEC(e1);
+		freeMemVEC(e2);
+		freeMemVEC(ft);
+		freeMemVEC(xTmp);
+		freeMemVEC(piG);
+		printf("\033[1;31m");
+		printf("VECAddVector(piG,e2) failed\n");
+		printf("Error in PageRank\n");
+		printf("\033[0m");
+		return NULL;
+	}
 
 	//Free allocated memory
 	freeMemVEC(e1);
@@ -123,38 +225,38 @@ VEC* PageRank(Liste* tab, VEC* x, int size) {
 }
 
 void Convergence(Liste* tab, VEC* x, int taille){
-	
 	VEC* xPrec = NULL;
-	VEC* tmp = NULL;
-	float diff = 0.0;
 	for(int i = 0; i < 1000; i++) {
 		xPrec = x;
 		x = PageRank(tab, x, taille);
 		if(x == NULL) {
-			printf("ERROR AT EXIT OF PAGERANK FUNCTION\n");
 			freeMemVEC(xPrec);
 			freeMemVEC(x);
+			printf("\033[1;31m");
+			printf("x uninitialized with PageRank\n");
+			printf("Error in Convergence\n");
+			printf("\033[0m");
 			return;
 		}
-		tmp = minusVector(x, xPrec);
-		if(tmp == NULL) {
-			printf("ERROR AT EXIT OF MINUSVECTOR FUNCTION\n");
-			freeMemVEC(xPrec);
-			freeMemVEC(x);
-			freeMemVEC(tmp);
-			return;
-		}
-		diff = Norme1(tmp);
-		if(diff <= DELTA) {
+		int respComp = compVector(x, xPrec);
+		if(respComp == 1) {
+			printf("\033[1;32m");
 			printf("Converge at it %d\n", i);
+			printf("\033[0m");
+			printf("Vector of convergence :\n");
 			printVEC(x);
 			freeMemVEC(x);
 			freeMemVEC(xPrec);
-			freeMemVEC(tmp);
+			return;
+		} else if( respComp == -1) {
+			printf("\033[1;31m");
+			printf("respComp = -1\n");
+			printf("Error in Convergence\n");
+			printf("\033[0m");
+			freeMemVEC(x);
+			freeMemVEC(xPrec);
 			return;
 		}
-		freeMemVEC(tmp);
-		tmp = NULL;
 		freeMemVEC(xPrec);
 		xPrec = NULL;
 	}

@@ -15,7 +15,14 @@ int testDel() {
 	return 0;
 }
 
-void delColumn(Liste* tab, int size) {
+int delColumn(Liste* tab, int size) {
+	if(tab == NULL) {
+		printf("\033[1;31m");
+		printf("tab uninitialized\n");
+		printf("Error in delColumn\n");
+		printf("\033[0m");
+		return -1;
+	}
 	int j = 0;
 	for(int i = 0; i < size; i++) {
 		if(testDel()) {
@@ -25,5 +32,5 @@ void delColumn(Liste* tab, int size) {
 			tab[i].exist = 0;
 		}
 	}
-	printf("%d deleted columne\n", j);
+	return j;
 }

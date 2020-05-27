@@ -7,12 +7,9 @@
 #include "../lib/calcul.h"
 
 int main(int argc, char **argv) {
-	printf("Check\n");
 	double temps = 0;
 	int tempsInit = clock();
-	//char *Chemin = argv[1];
 	FILE* fichier = NULL;
-	printf("Check file\n");
 	fichier = fopen("Graphe/web1.txt", "r+");
 	if (fichier != NULL)
     {

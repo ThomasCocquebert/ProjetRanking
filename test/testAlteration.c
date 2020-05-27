@@ -19,7 +19,8 @@ int main() {
 	printf("Nb Arc : %d\n", NombreArcs);
 	printf("Nb Sommets : %d\n", NombreSommets);
 	Liste* tab = LectureFichier(fichier, NombreSommets);
-	delColumn(tab, NombreSommets);
+	int j = delColumn(tab, NombreSommets);
+	printf("Deleted columns : %d\n", j);
 	printf("Libération de la structure\n");
 	freeTableau(tab, NombreSommets);
 	int tempsFin = clock();

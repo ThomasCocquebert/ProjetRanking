@@ -1,29 +1,44 @@
 #include "stdlib.h"
 #include "stdio.h"
-#include "../lib/vector.h"
 #include "math.h"
+#include "../lib/vector.h"
 
 int initVECNull(VEC* vector, int size) {
+	if(vector == NULL) {
+		printf("\033[1;31m");
+		printf("VEC* vector uninitialized\n");
+		printf("Error in initVECNull\n");
+		printf("\033[0m");
+		return 0;
+	}
 	vector->size = size;
 	vector->array = calloc(vector->size, sizeof(double));
 	if(vector->array == NULL) {
 		printf("\033[1;31m");
 		printf("Allocation of VEC->array failed\n");
+		printf("Error in initVECNull\n");
 		printf("\033[0m");
 		free(vector);
 		return 0;
-	} else {
-		return 1;
 	}
+	return 1;
 }
 
 int initVEC(VEC* vector, int size) {
+	if(vector == NULL) {
+		printf("\033[1;31m");
+		printf("VEC* vector uninitialized\n");
+		printf("Error in initVEC\n");
+		printf("\033[0m");
+		return 0;
+	}
 	int i = 0;
 	vector->size = size;
 	vector->array = malloc(sizeof(double) * vector->size);
 	if(vector->array == NULL) {
 		printf("\033[1;31m");
 		printf("Allocation of VEC->array failed\n");
+		printf("Error in initVEC\n");
 		printf("\033[0m");
 		free(vector);
 		return 0;
@@ -35,12 +50,20 @@ int initVEC(VEC* vector, int size) {
 }
 
 int initVECe(VEC* vector, int size) {
+	if(vector == NULL) {
+		printf("\033[1;31m");
+		printf("VEC* vector uninitialized\n");
+		printf("Error in initVECe\n");
+		printf("\033[0m");
+		return 0;
+	}
 	int i = 0;
 	vector->size = size;
 	vector->array = malloc(sizeof(double) * vector->size);
 	if(vector->array == NULL) {
 		printf("\033[1;31m");
 		printf("Allocation of VEC->array failed\n");
+		printf("Error in initVECe\n");
 		printf("\033[0m");
 		free(vector);
 		return 0;
@@ -51,7 +74,14 @@ int initVECe(VEC* vector, int size) {
 	return 1;
 }
 
-void printVEC(VEC* vector) {
+int printVEC(VEC* vector) {
+	if(vector == NULL) {
+		printf("\033[1;31m");
+		printf("VEC* vector uninitialized\n");
+		printf("Error in printVEC\n");
+		printf("\033[0m");
+		return 0;
+	}
 	int i =0;
 	printf("~~~~~~~~~~ Printing Vector ~~~~~~~~~~\n");
 	printf("Size of vector : %d\n", vector->size);
@@ -61,6 +91,7 @@ void printVEC(VEC* vector) {
 	}
 	printf(")\n");
 	printf("~~~~~~~~~~ Vector printed ~~~~~~~~~~\n\n");
+	return 1;
 }
 
 void freeMemVEC(VEC* vector) {
@@ -69,21 +100,41 @@ void freeMemVEC(VEC* vector) {
 }
 
 VEC* minusVector(VEC* v1, VEC* v2) {
+	if(v1 == NULL) {
+		printf("\033[1;31m");
+		printf("VEC* v1 uninitialized\n");
+		printf("Error in minusVector\n");
+		printf("\033[0m");
+		return NULL;
+	}
+	if(v2 == NULL) {
+		printf("\033[1;31m");
+		printf("VEC* v2 uninitialized\n");
+		printf("Error in minusVector\n");
+		printf("\033[0m");
+		return NULL;
+	}
 	if (v1->size != v2->size) {
 		printf("\033[1;31m");
-		printf("Different size for v1 and v2\n");
+		printf("Different size for VEC* v1 and VEC* v2\n");
+		printf("Error in minusVector\n");
 		printf("\033[0m");
 		return NULL;
 	}
 	VEC* tmp = malloc(sizeof(VEC));
 	if(tmp == NULL) {
 		printf("\033[1;31m");
-		printf("Allocation failed for tmp vector\n");
+		printf("Allocation failed for VEC* tmp vector\n");
+		printf("Error in minusVector\n");
 		printf("\033[0m");
 		return NULL;
 	}
 	if(!initVECNull(tmp, v1->size)) {
 		free(tmp);
+		printf("\033[1;31m");
+		printf("Initialization failed for VEC* tmp vector\n");
+		printf("Error in minusVector\n");
+		printf("\033[0m");
 		return NULL;
 	}
 	for(int i = 0; i < tmp->size; i++) {
@@ -93,47 +144,116 @@ VEC* minusVector(VEC* v1, VEC* v2) {
 }
 
 int compVector(VEC* v1, VEC* v2) {
-	VEC* minus = minusVector(v1, v2);
-	if(minus == NULL) {
+	if(v1 == NULL) {
+		printf("\033[1;31m");
+		printf("VEC* v1 uninitialized\n");
+		printf("Error in compVector\n");
+		printf("\033[0m");
 		return -1;
 	}
-	double tmp = 0.0;
-	for(int i = 0; i < minus->size; i++) {
-		tmp += minus->array[i]*minus->array[i];
+	if(v2 == NULL) {
+		printf("\033[1;31m");
+		printf("VEC* v2 uninitialized\n");
+		printf("Error in compVector\n");
+		printf("\033[0m");
+		return -1;
 	}
-	//~ tmp = sqrt(tmp);
+	VEC* minus = minusVector(v1, v2);
+	if(minus == NULL) {
+		printf("\033[1;31m");
+		printf("VEC* minus uninitialized\n");
+		printf("Error in compVector\n");
+		printf("\033[0m");
+		return -1;
+	}
+	double tmp = Norme1(minus);
 	if(tmp <= DELTA) {
 		printf("\033[1;32m");
 		printf("DELTA reached\n");
 		printf("\033[0m");
 		freeMemVEC(minus);
 		return 1;
-	} else {
-		freeMemVEC(minus);
-		return 0;
 	}
+	freeMemVEC(minus);
+	return 0;
 }
 
-void VECByDouble(VEC* v, double mult) {
+int VECByDouble(VEC* v, double mult) {
+	if(v == NULL) {
+		printf("\033[1;31m");
+		printf("VEC* v uninitialized\n");
+		printf("Error in VECByDouble\n");
+		printf("\033[0m");
+		return 0;
+	}
 	for(int i = 0; i < v->size; i++) {
 		v->array[i] = mult * v->array[i];
 	}
+	return 1;
 }
 
-void VECAddDouble(VEC* v, double add) {
+int VECAddDouble(VEC* v, double add) {
+	if(v == NULL) {
+		printf("\033[1;31m");
+		printf("VEC* v uninitialized\n");
+		printf("Error in VECAddDouble\n");
+		printf("\033[0m");
+		return 0;
+	}
 	for(int i = 0; i < v->size; i++) {
 		v->array[i] += add;
 	}
+	return 1;
 }
 
-void VECAddVector(VEC* v, VEC* v2){
+int VECAddVector(VEC* v, VEC* v2){
+	if(v == NULL) {
+		printf("\033[1;31m");
+		printf("VEC* v uninitialized\n");
+		printf("Error in VECAddVector\n");
+		printf("\033[0m");
+		return 0;
+	}
+	if(v2 == NULL) {
+		printf("\033[1;31m");
+		printf("VEC* v2 uninitialized\n");
+		printf("Error in VECAddVector\n");
+		printf("\033[0m");
+		return 0;
+	}
+	if (v->size != v2->size) {
+		printf("\033[1;31m");
+		printf("Different size for v and v2\n");
+		printf("Error in VECAddVector\n");
+		printf("\033[0m");
+		return 0;
+	}
 	int i;
 	for(i = 0; i < v->size; i++){
 		v->array[i] = v->array[i] + v2->array[i];
 	}
+	return 1;
 }
 
 double VxVt(VEC *v1, VEC *v2){
+	if(v1 == NULL) {
+		printf("\033[1;31m");
+		printf("VEC* v1 uninitialized\n");
+		printf("Error in VxVt\n");
+		printf("\033[0m");
+	}
+	if(v2 == NULL) {
+		printf("\033[1;31m");
+		printf("VEC* v2 uninitialized\n");
+		printf("Error in VxVt\n");
+		printf("\033[0m");
+	}
+	if (v1->size != v2->size) {
+		printf("\033[1;31m");
+		printf("Different size for v and v2\n");
+		printf("Error in VxVt\n");
+		printf("\033[0m");
+	}
 	double res = 0;
 	int i;
 	for(i = 0; i < v1->size; i++){
@@ -143,19 +263,28 @@ double VxVt(VEC *v1, VEC *v2){
 }
 
 double Norme1(VEC* v){
+	if(v == NULL) {
+		printf("\033[1;31m");
+		printf("VEC* v uninitialized\n");
+		printf("Error in Norme1\n");
+		printf("\033[0m");
+	}
 	int i;
 	double res = 0;
 	for(i = 0; i < v->size; i++){
-		if(v->array[i] < 0){
-			v->array[i] = v->array[i] * (-1);
-		}
-		res = res + v->array[i];
+		res += fabs(v->array[i]);
 	}
-	printf("res = %lf\n", res);
 	return res;
 }
 
 VEC* Normalisation(VEC* v){
+	if(v == NULL) {
+		printf("\033[1;31m");
+		printf("VEC* v uninitialized\n");
+		printf("Error in Normalisation\n");
+		printf("\033[0m");
+		return NULL;
+	}
 	int i;
 	double Norme = Norme1(v);
 	for(i = 0; i < v->size; i++){
@@ -164,9 +293,31 @@ VEC* Normalisation(VEC* v){
 	return v;
 }
 
-void CopyVector(VEC* v, VEC* v2){
+int CopyVector(VEC* v, VEC* v2){
+	if(v == NULL) {
+		printf("\033[1;31m");
+		printf("VEC* v uninitialized\n");
+		printf("Error in CopyVector\n");
+		printf("\033[0m");
+		return 0;
+	}
+	if(v2 == NULL) {
+		printf("\033[1;31m");
+		printf("VEC* v2 uninitialized\n");
+		printf("Error in CopyVector\n");
+		printf("\033[0m");
+		return 0;
+	}
+	if (v->size != v2->size) {
+		printf("\033[1;31m");
+		printf("Different size for v and v2\n");
+		printf("Error in CopyVector\n");
+		printf("\033[0m");
+		return 0;
+	}
 	int i;
 	for(i = 0; i < v->size; i++){
 		v2->array[i] = v->array[i];
 	}
+	return 1;
 }

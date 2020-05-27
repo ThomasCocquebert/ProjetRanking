@@ -18,6 +18,7 @@ int testDel();
 Delete Sommet of a Liste and set its value exist at 0
 tab : the array of List representing the matrix
 size : the size of the tab
+Return the number of deleted column or -1 if tab is uninitialized
 */
-void delColumn(Liste* tab, int size);
+int delColumn(Liste* tab, int size);
 #endif

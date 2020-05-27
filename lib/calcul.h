@@ -5,7 +5,7 @@
 Compute the F vector for the List tab
 tab : the List of Sommet
 taille : the size of the vector f
-Return the pointer of vector or NULL if allocation failed
+Return the pointer of vector or NULL if an error occured during the function
 */
 VEC * computeF(Liste * tab, int taille);
 
@@ -14,7 +14,7 @@ Compute the operation pi multiple by matrix tab
 tab : the Liste of Sommet
 pi : the vector to multiply
 size : the size of vector
-Return an address of VEC or NULL if allocation failed
+Return an address of VEC or NULL an error occured
 */
 VEC* computePiG(Liste* tab, VEC* pi, int size);
 
@@ -23,7 +23,7 @@ Compute the PageRank formula
 tab : the Liste of Sommet
 x : the vector
 size : the size of the vector
-Return the address of the new vector x or NULL if allocation failed
+Return the address of the new vector x or NULL if an error occured
 */
 VEC* PageRank(Liste* tab, VEC* x, int size);
 

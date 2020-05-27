@@ -33,6 +33,7 @@ struct Liste
 /*
 Initilized a list
 We use an array of list to stored each columne of our matrix
+Return the address of the Liste or NULL if error
 */
 Liste* initListe();
 
@@ -41,14 +42,14 @@ Initialized a Sommet
 ligne : the Sommet.numLigne value
 colonne : the Sommet.numColonne value
 proba : the Sommet.proba value
-Return an adress of Sommet
+Return an adress of Sommet of NULL if error
 */
 Sommet* initSommet(int ligne,int colonne,double proba);
 
 /*
 Initilized the array of Liste
 nb : the number of Liste in the array
-Return an array of liste address
+Return an array of liste address of NULL if error
 */
 Liste* initTableau(int nb);
 

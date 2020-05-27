@@ -6,6 +6,9 @@ CC=gcc
 # Linker
 LINK=gcc
 
+# Default goal
+.DEFAULT_GOAL := all
+
 #############################################
 # Build of .o files
 
@@ -80,7 +83,7 @@ main:	main.o vector.o structure.o lecture.o alteration.o calcul.o
 
 # Run main
 runMain:	main
-	./main
+	./main Graphe/web1.txt
 
 # Run testVector executable
 runTestVector: testVector
@@ -134,6 +137,13 @@ runTestCalculDr:	testCalcul
 
 #############################################
 # Miscellous command
+
+# Build all executable files
+all:	main testVector testAlteration testCalcul
+	$(CC) -Wall -g -o testVector vector.o testVector.o -lm
+	$(CC) -Wall -g -o testAlteration testAlteration.o alteration.o structure.o lecture.o
+	$(CC) -Wall -g -o testCalcul testCalcul.o vector.o structure.o lecture.o calcul.o -lm
+	$(CC) -Wall -g -o main main.o vector.o structure.o lecture.o alteration.o calcul.o -lm
 
 # Clean .o files and executable
 clean :
