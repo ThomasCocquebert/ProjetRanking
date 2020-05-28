@@ -19,13 +19,18 @@ int main(int argc, char** argv) {
 		printf("Veuillez spécifier un graphe à ouvrir\n");
 		printf("\033[0m");
 		exit(1);
-	} else if (argc > 2) {
+	} else if (argc > 3) {
 		printf("\033[1;31m");
 		printf("Trop d'arguments\n");
 		printf("\033[0m");
 		exit(1);
 	}
 	double temps = 0.0;
+	int percentage = 15;
+	if(argv[2] != NULL){
+		percentage = atoi(argv[2]);
+	}
+	printf("Pourcentage = %d\n", percentage);
 	FILE* fichier = NULL;
 	fichier = fopen(argv[1], "r+");
 	if (fichier == NULL) {
@@ -96,7 +101,7 @@ int main(int argc, char** argv) {
 
 	tempsInitTask = clock();
 	printf("Début des modifications du graphe\n");
-	int nbDelSommets = delColumn(tab, NombreSommets);
+	int nbDelSommets = delColumn(tab, NombreSommets, percentage);
 	printf("Nombre de sommets supprimés : %d\n", nbDelSommets);
 	int newSommets = NombreSommets -nbDelSommets;
 	printf("Nouveau nombre de sommets %d\n", newSommets);

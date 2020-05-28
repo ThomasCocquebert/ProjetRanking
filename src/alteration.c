@@ -8,8 +8,8 @@ int genNumber() {
 	return (rand()%(100));
 }
 
-int testDel() {
-	if(genNumber() <15) {
+int testDel(int percentage) {
+	if(genNumber() < percentage) {
 		return 1;
 	}
 	return 0;
@@ -152,7 +152,7 @@ int delLigne2(Liste *tab, int ligne, int taille) {
 }
 
 
-int delColumn(Liste* tab, int size) {
+int delColumn(Liste* tab, int size, int percentage) {
 	if(tab == NULL) {
 		printf("\033[1;31m");
 		printf("tab uninitialized\n");
@@ -163,7 +163,7 @@ int delColumn(Liste* tab, int size) {
 	int j = 0;
 	for(int i = 0; i < size; i++) {
 		tab[i].newCol = tab[i].newCol - j;
-		if(testDel()) {
+		if(testDel(percentage)) {
 			j++;
 			tab[i].exist = 0;
 		}
