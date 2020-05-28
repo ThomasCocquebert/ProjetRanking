@@ -20,7 +20,7 @@ int delLigne(Liste *tab, int ligne,int taille) {
 	if(tab == NULL) {
 		printf("\033[1;31m");
 		printf("tab uninitialized\n");
-		printf("Error in delColumn\n");
+		printf("Error in delLigne\n");
 		printf("\033[0m");
 		return -1;
 	}
@@ -136,7 +136,7 @@ int delLigne2(Liste *tab, int ligne, int taille) {
 	if(tab == NULL) {
 		printf("\033[1;31m");
 		printf("tab uninitialized\n");
-		printf("Error in delColumn\n");
+		printf("Error in delLigne\n");
 		printf("\033[0m");
 		return -1;
 	}
@@ -180,7 +180,6 @@ int delArcListe(Liste* liste, int perc) {
 			
 	Sommet* tmp = liste->first;
 	Sommet* tmpPrec = liste->first;
-	Sommet* delS = NULL;
 	int cpt = 0;
 	
 	while (tmp->suivant!=NULL) {
@@ -190,7 +189,7 @@ int delArcListe(Liste* liste, int perc) {
 		if ( testDel(perc) == 1) {
 			cpt++;
 			//~ printf("DELETE SOMMET:\n");
-			afficherSommet(tmp);
+			//~ afficherSommet(tmp);
 			//si c'est le dernier
 					
 			if (tmp->suivant == NULL) {
@@ -218,7 +217,7 @@ int delArc(Liste* tab, int size,int perc) {
 	if(tab == NULL) {
 		printf("\033[1;31m");
 		printf("tab uninitialized\n");
-		printf("Error in delColumn\n");
+		printf("Error in delArc\n");
 		printf("\033[0m");
 		return -1;
 	}
@@ -232,3 +231,28 @@ int delArc(Liste* tab, int size,int perc) {
 	return j;
 	
 }
+
+int delColumnArc(Liste* tab, int size, int pColumn, int pArc) {
+	if(tab == NULL) {
+		printf("\033[1;31m");
+		printf("tab uninitialized\n");
+		printf("Error in delColumnArc\n");
+		printf("\033[0m");
+		return -1;
+	}
+	int j = 0;
+	for(int i = 0; i < size; i++) {
+		tab[i].newCol = tab[i].newCol - j;
+		if(testDel(pColumn)) {
+			j++;
+			tab[i].exist = 0;
+		}
+		else {
+			j+= delArcListe(&tab[i], pArc);
+		}
+		
+	}
+	return j;
+}
+
+

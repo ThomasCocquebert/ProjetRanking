@@ -56,4 +56,6 @@ int delArc(Liste* tab, int size,int perc);
  * RETURN the number of arcs deleted
 */
 int delArcListe(Liste* liste, int perc);
+
+int delColumnArc(Liste* tab, int size, int pColumn, int pArc);
 #endif
