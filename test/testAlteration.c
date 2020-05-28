@@ -10,7 +10,7 @@ int main() {
 	double temps = 0;
 	int tempsInit = clock();
 	FILE* fichier = NULL;
-	fichier = fopen("Graphe/wikipedia.txt", "r+");
+	fichier = fopen("Graphe/wb-cs-stanford.txt", "r+");
 	if (fichier != NULL)
     {
 	printf("Lecture du graphe\n");
@@ -22,7 +22,8 @@ int main() {
 	//~ afficherTableau(tab,NombreSommets);
 	printf("Suppression ");
 	//~ int j = delColumn(tab, NombreSommets);
-	int j= delArc(tab,NombreSommets,2);
+	int arcs =0;
+	int j= delColumnArc(&arcs,tab,NombreSommets,14,1);
 	//~ Liste* l1 = initListe();
 	
 	//~ Sommet* s1 = initSommet(3,5,0.5);
@@ -55,8 +56,8 @@ int main() {
 	//~ freeListe(l1);
 	//~ free(l1);
 	//~ afficherTableau(tab,NombreSommets);
-	printf("Deleted arcs : %d\n", j);
-	//~ printf("Deleted columns : %d\n", j);
+	printf("Deleted arcs : %d\n", arcs);
+	printf("Deleted columns : %d\n", j);
 	printf("Libération de la structure\n");
 	freeTableau(tab, NombreSommets);
 	int tempsFin = clock();
