@@ -146,6 +146,9 @@ all:	main testVector testAlteration testCalcul
 	$(CC) -Wall -g -o main main.o structure.o vector.o lecture.o alteration.o calcul.o -lm
 
 # Clean .o files and executable
-clean :
+clean:
 	rm *.o testVector testAlteration testCalcul main
 
+# Clean .o files and exe for Windowd
+cleanW:	
+	del *.o *.exe

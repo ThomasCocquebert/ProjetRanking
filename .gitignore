@@ -69,3 +69,12 @@ Graphe/StanfordV2.txt
 
 # PDF files
 *.pdf
+
+# Report doc
+report/
+
+# Script files
+*.bat
+
+ # Log files
+log*
