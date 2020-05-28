@@ -57,5 +57,12 @@ int delArc(Liste* tab, int size,int perc);
 */
 int delArcListe(Liste* liste, int perc);
 
+/*
+ * Delete arc and column in the matrix
+ * tab: array of liste* representing the matrix
+ * pColumn : percentage of deleted column
+ * pArc : percentage of deleted ard
+ * RETURN the number of arcs+ column deleted
+*/
 int delColumnArc(Liste* tab, int size, int pColumn, int pArc);
 #endif
