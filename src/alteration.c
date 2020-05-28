@@ -163,25 +163,9 @@ int delColumn(Liste* tab, int size) {
 	int j = 0;
 	for(int i = 0; i < size; i++) {
 		tab[i].newCol = tab[i].newCol - j;
-		if(1) {
-			if(i == 2) {
-				j++;
-				tab[i].exist = 0;
-			}
-			if(i == 3) {
-				j++;
-				tab[i].exist = 0;
-			}
-			if(i == 4) {
-				j++;
-				tab[i].exist = 0;
-			}
-			//~ printf("Delete column %d.\n",i);
-			//j++;
-			//freeListe(&tab[i]);
-			//tab[i].first = NULL;
-			//tab[i].exist = 0;
-			//delLigne2(tab, i, size);
+		if(testDel()) {
+			j++;
+			tab[i].exist = 0;
 		}
 	}
 	return j;

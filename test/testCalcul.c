@@ -18,26 +18,39 @@ int main(int argc, char **argv) {
 	printf("Nb Arc : %d\n", NombreArcs);
 	printf("Nb Sommets : %d\n", NombreSommets);
 	Liste* tab = LectureFichier(fichier, NombreSommets);
-	afficherTableau(tab, NombreSommets);
+	//afficherTableau(tab, NombreSommets);
 
-	int delCol = delColumn(tab, NombreSommets);
-	printf("Sommet supprimés : %d\n", delCol);
-	afficherTableau(tab, NombreSommets);
-	
-	
-	VEC* f = computeF(tab, NombreSommets-delCol);
-  	printVEC(f);
+	//int delCol = delColumn(tab, NombreSommets);
+	//printf("Sommet supprimés : %d\n", delCol);
+	//afficherTableau(tab, NombreSommets);
 	
 	VEC* x = malloc(sizeof(VEC));
-	initVEC(x, NombreSommets-delCol);
-	VEC* piG = computePiG(tab, x, NombreSommets-delCol);
-	printVEC(piG);
-	VEC* piG2 = computePiG(tab, piG, NombreSommets-delCol);
-	printVEC(piG2);
-	freeMemVEC(piG);
-	freeMemVEC(piG2);
-	freeMemVEC(f);
+	initVEC(x, NombreSommets);
+	x->array[0] = 0.12;
+	x->array[1] = 0.15;
+	x->array[2] = 0.09;
+	x->array[3] = 0.24;
+	x->array[4] = 0.12;
+	x->array[5] = 0.08;
+	x->array[6] = 0.1;
+	x->array[7] = 0.1;
+	//x = Convergence(tab, x, NombreSommets);
+
+	VEC* norm = malloc(sizeof(VEC));
+	initVECNull(norm, NombreSommets-3);
+
+	tab[2].exist = 0;
+	tab[3].exist = 0;
+	tab[4].exist = 0;
+
+	printVEC(x);
+	NewVector(norm, x, tab);
+	printVEC(norm);
+	Normalisation(norm);
+	printVEC(norm);
+
 	freeMemVEC(x);
+	freeMemVEC(norm);
 	freeTableau(tab, NombreSommets);
 	}
     else

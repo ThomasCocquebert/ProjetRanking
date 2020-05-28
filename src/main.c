@@ -98,6 +98,8 @@ int main(int argc, char** argv) {
 	printf("Début des modifications du graphe\n");
 	int nbDelSommets = delColumn(tab, NombreSommets);
 	printf("Nombre de sommets supprimés : %d\n", nbDelSommets);
+	int newSommets = NombreSommets -nbDelSommets;
+	printf("Nouveau nombre de sommets %d\n", newSommets);
 	printf("Fin des modifications du graphe\n");
 	tempsFinTask = clock();
 	temps = (float)(tempsFinTask-tempsInitTask)/CLOCKS_PER_SEC;
@@ -111,8 +113,6 @@ int main(int argc, char** argv) {
 
 	tempsInitTask = clock();
 	printf("Calcul du 2ème PageRank\n");
-	int newSommets = NombreSommets -nbDelSommets;
-	printf("%d\n", newSommets);
 	VEC* x2 = malloc(sizeof(VEC));
 	if(x2 == NULL) {
 		printf("\033[1;31m");
@@ -131,7 +131,7 @@ int main(int argc, char** argv) {
 		free(x2);
 		exit(1);
 	}
-	//x2 = Convergence(tab, x2, newSommets);
+	x2 = Convergence(tab, x2, newSommets);
 	if(x2 == NULL) {
 		printf("\033[1;31m");
 		printf("La convergence n'a pas abouti\n");
@@ -144,6 +144,49 @@ int main(int argc, char** argv) {
 	tempsFinTask = clock();
 	temps = (float)(tempsFinTask-tempsInitTask)/CLOCKS_PER_SEC;
 	printf("Temps du 2ème PageRank : %lf\n\n", temps);
+
+	// ##################################################
+
+	// ##################################################
+	// PageRank modifié
+
+	tempsInitTask = clock();
+	printf("Calcul du PageRank modifié\n");
+	VEC* xNorm = malloc(sizeof(VEC));
+	if(xNorm == NULL) {
+		printf("\033[1;31m");
+		printf("Allocation du vecteur xNorm échouée\n");
+		printf("\033[0m");
+		freeMemVEC(x);
+		freeMemVEC(x2);
+		freeTableau(tab, NombreSommets);
+		exit(1);
+	}
+	if(!initVECNull(xNorm, newSommets)) {
+		printf("\033[1;31m");
+		printf("Initialisation du vecteur xNorm échouée\n");
+		printf("\033[0m");
+		freeMemVEC(x);
+		freeMemVEC(x2);
+		free(xNorm);
+		freeTableau(tab, NombreSommets);
+	}
+	NewVector(xNorm, x, tab);
+	Normalisation(xNorm);
+	xNorm = Convergence(tab, xNorm, newSommets);
+	if(xNorm == NULL) {
+		printf("\033[1;31m");
+		printf("La convergence n'a pas abouti\n");
+		printf("\033[0m");
+		freeMemVEC(x);
+		freeMemVEC(x2);
+		freeTableau(tab, NombreSommets);
+		exit(1);
+	}
+	printf("Fin du PageRank modifié\n");
+	tempsFinTask = clock();
+	temps = (float)(tempsFinTask-tempsInitTask)/CLOCKS_PER_SEC;
+	printf("Temps du PageRank modifié : %lf\n\n", temps);
 
 	// ##################################################
 
@@ -169,11 +212,6 @@ int main(int argc, char** argv) {
 	temps = (float)(tempsFin-tempsInit)/CLOCKS_PER_SEC;
 	printf("Durée totale d'exécution : %lf\n", temps);
 	exit(0);
-
-	// ##################################################
-
-	// ##################################################
-	// Comm
 
 	// ##################################################
 }

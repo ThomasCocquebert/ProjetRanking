@@ -273,7 +273,7 @@ int NewVector(VEC* Vnew, VEC* Vold, Liste* tab){
 	}
 	int i;
 	int cpt = 0;
-	for(i = 0; i < Vold->size; i++){
+	for(i = 0; i < Vnew->size; i++){
 		while(tab[cpt].exist == 0){
 			cpt++;
 		}
