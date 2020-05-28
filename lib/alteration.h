@@ -39,4 +39,21 @@ int delLigne(Liste* tab, int ligne, int taille);
 int delLigne2(Liste* tab, int ligne, int taille);
 
 void deleteSommet(Liste* liste, int ligne);
+
+/*
+ * Delete arc from a a Array liste* with a percentage
+ * tab: the array of List representing the matrix.
+ * size : the size of the tab
+ * perc : percentage of deleted arcs
+ * RETURN the number of arcs deleted
+*/
+int delArc(Liste* tab, int size,int perc);
+
+/*
+ * Delete arc from liste* with a percentage
+ * liste : Liste* representif a column
+ * perc : percentage of deleted arcs
+ * RETURN the number of arcs deleted
+*/
+int delArcListe(Liste* liste, int perc);
 #endif

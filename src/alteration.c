@@ -170,3 +170,65 @@ int delColumn(Liste* tab, int size, int percentage) {
 	}
 	return j;
 }
+
+int delArcListe(Liste* liste, int perc) {
+	if (liste->first == NULL 
+			|| liste->first->suivant == NULL
+			|| liste->exist == 0) {
+				return 0;
+			}
+			
+	Sommet* tmp = liste->first;
+	Sommet* tmpPrec = liste->first;
+	Sommet* delS = NULL;
+	int cpt = 0;
+	
+	while (tmp->suivant!=NULL) {
+		
+		tmpPrec = tmp;
+		tmp = tmp->suivant;
+		if ( testDel(perc) == 1) {
+			cpt++;
+			//~ printf("DELETE SOMMET:\n");
+			afficherSommet(tmp);
+			//si c'est le dernier
+					
+			if (tmp->suivant == NULL) {
+				liste->last = tmpPrec;
+				tmpPrec->suivant = NULL;				
+				free(tmp); 
+				tmp = tmpPrec; 
+			}
+			//si c'est pas le dernier
+			else {
+				tmpPrec->suivant=tmp->suivant;
+				free(tmp);
+				tmp = tmpPrec; 
+			}
+			
+			
+			
+		}
+	
+	}
+	
+	return cpt;
+}
+int delArc(Liste* tab, int size,int perc) {
+	if(tab == NULL) {
+		printf("\033[1;31m");
+		printf("tab uninitialized\n");
+		printf("Error in delColumn\n");
+		printf("\033[0m");
+		return -1;
+	}
+	
+	int j = 0;
+	for(int i = 0; i < size; i++) {
+		j+= delArcListe(&tab[i],perc);
+
+	}
+	
+	return j;
+	
+}
