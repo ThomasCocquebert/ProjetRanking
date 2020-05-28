@@ -26,6 +26,7 @@ int main(int argc, char** argv) {
 		exit(1);
 	}
 	double temps = 0.0;
+	double ecart = 0.0;
 	int percentage = 15;
 	if(argv[2] != NULL){
 		percentage = atoi(argv[2]);
@@ -109,7 +110,8 @@ int main(int argc, char** argv) {
 	tempsFinTask = clock();
 	temps = (float)(tempsFinTask-tempsInitTask)/CLOCKS_PER_SEC;
 	printf("Temps de modification du graphe : %lf\n\n", temps);
-
+	
+	
 
 	// ##################################################
 
@@ -149,7 +151,7 @@ int main(int argc, char** argv) {
 	tempsFinTask = clock();
 	temps = (float)(tempsFinTask-tempsInitTask)/CLOCKS_PER_SEC;
 	printf("Temps du 2ème PageRank : %lf\n\n", temps);
-
+	ecart = temps;
 	// ##################################################
 
 	// ##################################################
@@ -192,7 +194,11 @@ int main(int argc, char** argv) {
 	tempsFinTask = clock();
 	temps = (float)(tempsFinTask-tempsInitTask)/CLOCKS_PER_SEC;
 	printf("Temps du PageRank modifié : %lf\n\n", temps);
-
+	ecart = ecart - temps;
+	if(ecart < 0){
+		ecart = ecart * -1;
+	}
+	printf("Ecart du temps d'execution : %lf\n", ecart);
 	// ##################################################
 
 	// ##################################################
