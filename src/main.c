@@ -19,7 +19,7 @@ int main(int argc, char** argv) {
 		printf("Veuillez spécifier un graphe à ouvrir\n");
 		printf("\033[0m");
 		exit(1);
-	} else if (argc > 3) {
+	} else if (argc > 2) {
 		printf("\033[1;31m");
 		printf("Trop d'arguments\n");
 		printf("\033[0m");
@@ -209,6 +209,7 @@ int main(int argc, char** argv) {
 	freeTableau(tab, NombreSommets);
 	freeMemVEC(x);
 	freeMemVEC(x2);
+	freeMemVEC(xNorm);
 	printf("Fin de la désallocation mémoire\n");
 	tempsFinTask = clock();
 	temps = (float)(tempsFinTask-tempsInitTask)/CLOCKS_PER_SEC;
