@@ -39,6 +39,7 @@ Liste* initTableau(int nb) {
 		tab[i].first = NULL;
 		tab[i].last = NULL;
 		tab[i].exist = 1;
+		tab[i].newCol = i;
 	}
 	if (tab == NULL) {
 		printf("\033[1;31m");
@@ -77,6 +78,7 @@ void afficherListe(Liste* l) {
 		printf("liste vide\n");
 	}
 	else {
+		printf("Liste : exist=%d, newCol=%d\n", l->exist, l->newCol);
 		Sommet* current = l->first;
 		while (current != NULL) {
 			afficherSommet(current);

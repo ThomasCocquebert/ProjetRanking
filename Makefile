@@ -45,7 +45,7 @@ testAlteration.o: test/testAlteration.c lib/structure.h lib/alteration.h
 	$(CC) -Wall -g -c test/testAlteration.c
 
 # Build testCalcul.o
-testCalcul.o:	test/testCalcul.c lib/structure.h lib/vector.h lib/lecture.h lib/calcul.h
+testCalcul.o:	test/testCalcul.c lib/structure.h lib/vector.h lib/lecture.h lib/calcul.h lib/alteration.h
 	$(CC) -Wall -g -c test/testCalcul.c -lm
 
 #############################################
@@ -60,13 +60,13 @@ testAlteration:	testAlteration.o structure.o alteration.o lecture.o
 	$(CC) -Wall -g -o testAlteration testAlteration.o structure.o alteration.o lecture.o
 
 # Build testCalcul executable
-testCalcul:	testCalcul.o structure.o vector.o lecture.o calcul.o
-	$(CC) -Wall -g -o testCalcul testCalcul.o structure.o vector.o lecture.o calcul.o -lm
+testCalcul:	testCalcul.o structure.o vector.o lecture.o calcul.o alteration.o
+	$(CC) -Wall -g -o testCalcul testCalcul.o structure.o vector.o lecture.o calcul.o alteration.o -lm
 
 allTest:	testVector testAlteration testCalcul
 	$(CC) -Wall -g -o testVector  testVector.o structure.o vector.o -lm
 	$(CC) -Wall -g -o testAlteration testAlteration.o structure.o alteration.o lecture.o
-	$(CC) -Wall -g -o testCalcul testCalcul.o structure.o vector.o lecture.o calcul.o -lm
+	$(CC) -Wall -g -o testCalcul testCalcul.o structure.o vector.o lecture.o calcul.o alteration.o -lm
 
 #############################################
 # Build main.o file
@@ -142,7 +142,7 @@ runTestCalculDr:	testCalcul
 all:	main testVector testAlteration testCalcul
 	$(CC) -Wall -g -o testVector  testVector.o structure.o vector.o -lm
 	$(CC) -Wall -g -o testAlteration testAlteration.o structure.o alteration.o lecture.o
-	$(CC) -Wall -g -o testCalcul testCalcul.o structure.o vector.o lecture.o calcul.o -lm
+	$(CC) -Wall -g -o testCalcul testCalcul.o structure.o vector.o lecture.o calcul.o alteration.o -lm
 	$(CC) -Wall -g -o main main.o structure.o vector.o lecture.o alteration.o calcul.o -lm
 
 # Clean .o files and executable

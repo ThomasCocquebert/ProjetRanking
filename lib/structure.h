@@ -26,6 +26,7 @@ typedef struct Liste Liste;
 struct Liste
 {	
 	int exist;
+	int newCol;
 	Sommet *first;
 	Sommet *last;
 };

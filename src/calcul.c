@@ -9,6 +9,7 @@
 VEC* computeF(Liste *tab, int taille) {
 	int i = 0;
 	int cpt = 0;
+	Sommet* cpy = NULL;
 	VEC* f = malloc(sizeof(VEC));
 	if(f == NULL) {
 		printf("\033[1;31m");
@@ -24,15 +25,14 @@ VEC* computeF(Liste *tab, int taille) {
 		printf("Error in computeF\n");
 		printf("\033[0m");
 		return NULL;
-	} 
-	for (i = 0; i < taille; i++) {
-		while(tab[cpt].exist == 0){
+	}
+	for(i = 0; i < taille; i++) {
+		while(tab[cpt].exist == 0) {
 			cpt++;
 		}
-		if (tab[cpt].first == NULL) {
+		if(tab[cpt].first == NULL) {
 			f->array[i] = 1;
 		} else {
-			Sommet* cpy;
 			cpy = tab[cpt].first;
 			while(tab[cpy->numLigne].exist == 0 && cpy->suivant != NULL) {
 				cpy = cpy->suivant;
@@ -42,7 +42,7 @@ VEC* computeF(Liste *tab, int taille) {
 			}
 		}
 		cpt++;
-		}
+	}
 	return f;
 }
 
@@ -68,29 +68,14 @@ VEC* computePiG(Liste* tab, VEC* pi, int size) {
 	}
 
 	for(int i = 0; i < size; i++) {
-		printf("i : %d\n", i);
-		printf("CptTab : %d\n", cptTab);
 		while(tab[cptTab].exist == 0) {
 			cptTab++;
 		}
 		if(tab[cptTab].first != NULL) {
-			printf("Boucle dans liste sommet %d\n", tab[cptTab].first->numColonne);
-			printf("CptTab : %d\n", cptTab);
 			copy = tab[cptTab].first;
 			while(copy != NULL) {
-				printf("copy->numLigne : %d\n", copy->numLigne);
-				if(tab[copy->numLigne].exist == 0) {
-					printf("Sommet skip\n");
-					afficherSommet(copy);
-					copy = copy->suivant;
-				} else {
-					printf("Sommet calculé\n");
-					afficherSommet(copy);
-					printf("copy->numLigne : %d\n", copy->numLigne);
-					printf("Exist ? %d\n", tab[copy->numLigne].exist);
-					tmp +=copy->proba * pi->array[copy->numLigne];
-					copy = copy->suivant;
-				}
+				tmp +=copy->proba * pi->array[copy->numLigne];
+				copy = copy->suivant;
 			}
 			res->array[i] = tmp;
 			tmp = 0.0;

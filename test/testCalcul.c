@@ -5,6 +5,7 @@
 #include "../lib/vector.h"
 #include "../lib/lecture.h"
 #include "../lib/calcul.h"
+#include "../lib/alteration.h"
 
 int main(int argc, char **argv) {
 	FILE* fichier = NULL;
@@ -18,31 +19,18 @@ int main(int argc, char **argv) {
 	printf("Nb Sommets : %d\n", NombreSommets);
 	Liste* tab = LectureFichier(fichier, NombreSommets);
 	afficherTableau(tab, NombreSommets);
-	//VEC* x = malloc(sizeof(VEC));
-	//initVEC(x, NombreSommets);
-	VEC* ft = computeF(tab, NombreSommets);
-	printVEC(ft);
-	freeMemVEC(ft);
-	ft = NULL;
-	//x = Convergence(tab, x, NombreSommets);
-	tab[2].exist = 0;
-	tab[3].exist = 0;
-	tab[4].exist = 0;
-	ft = computeF(tab, NombreSommets-3);
-	printVEC(ft);
-	freeMemVEC(ft);
 
-	VEC* x2 = malloc(sizeof(VEC));
-	initVEC(x2, NombreSommets-3);
-	printf("x2\n");
-	printVEC(x2);
-	VEC* piG = computePiG(tab, x2, NombreSommets-3);
-	printf("piG\n");
-	printVEC(piG);
-	freeMemVEC(x2);
-	freeMemVEC(piG);
+	int delCol = delColumn(tab, NombreSommets);
+	printf("Sommet supprimés : %d\n", delCol);
+	afficherTableau(tab, NombreSommets);
+	
+	
+	VEC* f = computeF(tab, NombreSommets-delCol);
+  	printVEC(f);
+	
+
+	freeMemVEC(f);
 	freeTableau(tab, NombreSommets);
-	//freeMemVEC(x);
 	}
     else
     {
