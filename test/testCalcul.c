@@ -28,8 +28,16 @@ int main(int argc, char **argv) {
 	VEC* f = computeF(tab, NombreSommets-delCol);
   	printVEC(f);
 	
-
+	VEC* x = malloc(sizeof(VEC));
+	initVEC(x, NombreSommets-delCol);
+	VEC* piG = computePiG(tab, x, NombreSommets-delCol);
+	printVEC(piG);
+	VEC* piG2 = computePiG(tab, piG, NombreSommets-delCol);
+	printVEC(piG2);
+	freeMemVEC(piG);
+	freeMemVEC(piG2);
 	freeMemVEC(f);
+	freeMemVEC(x);
 	freeTableau(tab, NombreSommets);
 	}
     else

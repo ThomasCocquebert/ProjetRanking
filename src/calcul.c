@@ -66,7 +66,26 @@ VEC* computePiG(Liste* tab, VEC* pi, int size) {
 		printf("\033[0m");
 		return NULL;
 	}
-
+	for(int i = 0; i < size; i++) {
+		while(tab[cptTab].exist == 0) {
+			cptTab++;
+		}
+		if(tab[cptTab].first != NULL) {
+			copy = tab[cptTab].first;
+			while(copy != NULL) {
+				if(tab[copy->numLigne].exist == 0) {
+					copy = copy->suivant;
+				} else {
+					tmp += copy->proba * pi->array[tab[copy->numLigne].newCol];
+					copy = copy->suivant;
+				}
+			}
+			res->array[i] = tmp;
+			tmp = 0.0;
+		}
+		cptTab++;
+	}
+	/*
 	for(int i = 0; i < size; i++) {
 		while(tab[cptTab].exist == 0) {
 			cptTab++;
@@ -82,6 +101,7 @@ VEC* computePiG(Liste* tab, VEC* pi, int size) {
 		}
 		cptTab++;
 	}
+	*/
 	return res;
 }
 
