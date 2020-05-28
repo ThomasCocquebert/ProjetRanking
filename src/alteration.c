@@ -232,7 +232,8 @@ int delArc(Liste* tab, int size,int perc) {
 	
 }
 
-int delColumnArc(Liste* tab, int size, int pColumn, int pArc) {
+int delColumnArc(int* arc,Liste* tab, 
+					int size, int pColumn, int pArc) {
 	if(tab == NULL) {
 		printf("\033[1;31m");
 		printf("tab uninitialized\n");
@@ -241,6 +242,7 @@ int delColumnArc(Liste* tab, int size, int pColumn, int pArc) {
 		return -1;
 	}
 	int j = 0;
+	int a = 0;
 	for(int i = 0; i < size; i++) {
 		tab[i].newCol = tab[i].newCol - j;
 		if(testDel(pColumn)) {
@@ -248,10 +250,11 @@ int delColumnArc(Liste* tab, int size, int pColumn, int pArc) {
 			tab[i].exist = 0;
 		}
 		else {
-			j+= delArcListe(&tab[i], pArc);
+			a+= delArcListe(&tab[i], pArc);
 		}
 		
 	}
+	*arc = a;
 	return j;
 }
 
