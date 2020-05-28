@@ -19,7 +19,7 @@ int main(int argc, char** argv) {
 		printf("Veuillez spécifier un graphe à ouvrir\n");
 		printf("\033[0m");
 		exit(1);
-	} else if (argc > 2) {
+	} else if (argc > 3) {
 		printf("\033[1;31m");
 		printf("Trop d'arguments\n");
 		printf("\033[0m");
