@@ -32,16 +32,13 @@ VEC* computeF(Liste *tab, int taille) {
 		if (tab[cpt].first == NULL) {
 			f->array[i] = 1;
 		} else {
-			Sommet* origin;
-			Sommet* copy;
-			origin = tab[cpt].first;
-			copy = tab[cpt].first;
-			while(tab[copy->numColonne].exist == 0 && copy->suivant != NULL) {
-				copy = copy->suivant;
+			Sommet* cpy;
+			cpy = tab[cpt].first;
+			while(tab[cpy->numLigne].exist == 0 && cpy->suivant != NULL) {
+				cpy = cpy->suivant;
 			}
-			if(tab[copy->numColonne].exist == 0) {
+			if(tab[cpy->numLigne].exist == 0) {
 				f->array[i] = 1;
-				tab[cpt].first = origin;
 			}
 		}
 		cpt++;
@@ -52,7 +49,7 @@ VEC* computeF(Liste *tab, int taille) {
 VEC* computePiG(Liste* tab, VEC* pi, int size) {
 	int cptTab = 0;
 	double tmp = 0.0;
-	Sommet* copy;
+	Sommet* copy = NULL;
 	VEC* res = malloc(sizeof(VEC));
 	if(res == NULL) {
 		printf("\033[1;31m");
@@ -71,20 +68,32 @@ VEC* computePiG(Liste* tab, VEC* pi, int size) {
 	}
 
 	for(int i = 0; i < size; i++) {
+		printf("i : %d\n", i);
+		printf("CptTab : %d\n", cptTab);
 		while(tab[cptTab].exist == 0) {
 			cptTab++;
 		}
 		if(tab[cptTab].first != NULL) {
+			printf("Boucle dans liste sommet %d\n", tab[cptTab].first->numColonne);
+			printf("CptTab : %d\n", cptTab);
 			copy = tab[cptTab].first;
-			while(tab[cptTab].first != NULL) {
-				if(tab[tab[cptTab].first->numColonne].exist == 1) {
-					tmp += tab[cptTab].first->proba * pi->array[tab[cptTab].first->numLigne];
+			while(copy != NULL) {
+				printf("copy->numLigne : %d\n", copy->numLigne);
+				if(tab[copy->numLigne].exist == 0) {
+					printf("Sommet skip\n");
+					afficherSommet(copy);
+					copy = copy->suivant;
+				} else {
+					printf("Sommet calculé\n");
+					afficherSommet(copy);
+					printf("copy->numLigne : %d\n", copy->numLigne);
+					printf("Exist ? %d\n", tab[copy->numLigne].exist);
+					tmp +=copy->proba * pi->array[copy->numLigne];
+					copy = copy->suivant;
 				}
-				tab[cptTab].first = tab[cptTab].first->suivant;
 			}
 			res->array[i] = tmp;
 			tmp = 0.0;
-			tab[cptTab].first = copy;
 		}
 		cptTab++;
 	}

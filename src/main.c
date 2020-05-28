@@ -111,6 +111,8 @@ int main(int argc, char** argv) {
 
 	tempsInitTask = clock();
 	printf("Calcul du 2ème PageRank\n");
+	int newSommets = NombreSommets -nbDelSommets;
+	printf("%d\n", newSommets);
 	VEC* x2 = malloc(sizeof(VEC));
 	if(x2 == NULL) {
 		printf("\033[1;31m");
@@ -120,7 +122,7 @@ int main(int argc, char** argv) {
 		freeTableau(tab, NombreSommets);
 		exit(1);
 	}
-	if(!initVEC(x2, NombreSommets-nbDelSommets)) {
+	if(!initVEC(x2, newSommets)) {
 		printf("\033[1;31m");
 		printf("Initialisation du vecteur x2 échouée");
 		printf("\033[0m");
@@ -129,7 +131,7 @@ int main(int argc, char** argv) {
 		free(x2);
 		exit(1);
 	}
-	x2 = Convergence(tab, x2, NombreSommets-nbDelSommets);
+	//x2 = Convergence(tab, x2, newSommets);
 	if(x2 == NULL) {
 		printf("\033[1;31m");
 		printf("La convergence n'a pas abouti\n");
