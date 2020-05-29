@@ -19,6 +19,8 @@ struct Sommet
 
 /*
 Liste : stored the first element of the columne
+exist : check if the column is delete of not, set at 1 if still exist and 0 if delete
+newCol : the new number of the column after the deletion of sommets
 first : the adress of the first Sommet
 last : the adress of the last Sommet
 */

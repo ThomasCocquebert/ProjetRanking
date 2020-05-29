@@ -18,11 +18,6 @@ int main(int argc, char **argv) {
 	printf("Nb Arc : %d\n", NombreArcs);
 	printf("Nb Sommets : %d\n", NombreSommets);
 	Liste* tab = LectureFichier(fichier, NombreSommets);
-	//afficherTableau(tab, NombreSommets);
-
-	//int delCol = delColumn(tab, NombreSommets);
-	//printf("Sommet supprimés : %d\n", delCol);
-	//afficherTableau(tab, NombreSommets);
 	
 	VEC* x = malloc(sizeof(VEC));
 	initVEC(x, NombreSommets);
@@ -34,7 +29,6 @@ int main(int argc, char **argv) {
 	x->array[5] = 0.08;
 	x->array[6] = 0.1;
 	x->array[7] = 0.1;
-	//x = Convergence(tab, x, NombreSommets);
 
 	VEC* norm = malloc(sizeof(VEC));
 	initVECNull(norm, NombreSommets-3);

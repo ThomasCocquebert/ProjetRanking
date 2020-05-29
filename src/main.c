@@ -75,7 +75,7 @@ int main(int argc, char** argv) {
 		}
 	} else {
 		printf("\033[1;31m");
-		printf("Trop d'arguments entrés");
+		printf("Trop d'arguments entrés\n");
 		printf("\033[0m");
 		exit(1);
 	}

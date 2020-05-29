@@ -36,8 +36,14 @@ Delete all element Sommet link to a specific line of each column.
  */
 int delLigne(Liste* tab, int ligne, int taille);
 
+/*
+UNUSED FUNCTION
+*/
 int delLigne2(Liste* tab, int ligne, int taille);
 
+/*
+UNUSED FUNCTION
+*/
 void deleteSommet(Liste* liste, int ligne);
 
 /*

@@ -85,23 +85,6 @@ VEC* computePiG(Liste* tab, VEC* pi, int size) {
 		}
 		cptTab++;
 	}
-	/*
-	for(int i = 0; i < size; i++) {
-		while(tab[cptTab].exist == 0) {
-			cptTab++;
-		}
-		if(tab[cptTab].first != NULL) {
-			copy = tab[cptTab].first;
-			while(copy != NULL) {
-				tmp +=copy->proba * pi->array[copy->numLigne];
-				copy = copy->suivant;
-			}
-			res->array[i] = tmp;
-			tmp = 0.0;
-		}
-		cptTab++;
-	}
-	*/
 	return res;
 }
 
@@ -266,7 +249,6 @@ VEC* PageRank(Liste* tab, VEC* x, int size) {
 VEC* Convergence(Liste* tab, VEC* x, int taille){
 	VEC* xPrec = NULL;
 	for(int i = 0; i < 1000; i++) {
-		//printf("Compute iteration %d\n", i);
 		xPrec = x;
 		x = PageRank(tab, x, taille);
 		if(x == NULL) {

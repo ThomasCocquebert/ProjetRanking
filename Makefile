@@ -83,7 +83,7 @@ main:	main.o structure.o vector.o lecture.o alteration.o calcul.o
 
 # Run main
 runMain:	main
-	./main Graphe/web1.txt
+	./main Graphe/wb-cs-stanford.txt
 
 # Run testVector executable
 runTestVector: testVector
@@ -102,7 +102,7 @@ runTestCalcul:	testCalcul
 
 # Run main executable with Valgrind
 runMainVal:	main
-	valgrind ./main Graphe/web1.txt
+	valgrind ./main Graphe/wb-cs-stanford.txt
 
 # Run testVector executable with Valgrind
 runTestVectorVal: testVector
@@ -121,7 +121,7 @@ runTestCalculVal:	testCalcul
 
 # Run main executable with drMemory
 runMainDr:	main
-	drmemory.exe main.exe Graphe/web1.txt
+	drmemory.exe main.exe Graphe/wb-cs-stanford.txt
 
 # Run testVector executable with deMemory
 runTestVectorDr: testVector
