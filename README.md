@@ -40,6 +40,12 @@ Notre programme charge graphe et exécute plusieurs calcul sur celui ci :
 * Un deuxième PageRank sur le graphe modifié
 * Un troisième PageRank sur le graphe modifié mais cette fois ci initialisé à l'aide du vectuer x obtenu précédement
 
+L'argument `-dA` indique que le programme va modifier le graphe en supprimant uniquement des arcs indépendament de leurs numéro de ligne ou de colonne
+
+L'argument `-dCA` indique que le programme va modifier le graphe en supprimant à la fois des sommets du graphes mais également va égalemnt des arcs en plus
+
+L'absence d'un de ces deux arguments signifie que le programme va supprimer des sommets du graphe lors de la modification de celui ci
+
 Voici les façons possible d'utiliser le programme 
 * `./main nom_du_graphe` : effectur les calcul sur le graphe nom_du_graphe avec une probabilité de suppression des sommets lors de la modification du graphe de 5 %
 * `./main nom_du_graphe proba` : effectur les calcul sur le graphe nom_du_graphe avec une probabilité de suppression des sommets lors de la modification du graphe de proba%
