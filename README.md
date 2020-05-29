@@ -1,6 +1,8 @@
 # ProjetRanking
 Sujet numéro 3 : Utilisation du PageRank précédent pour initialiser un nouveau calcul-sous graphe
 
+https://github.com/ThomasCocquebert/ProjetRanking
+
 ## Compilation des fichiers binaires
 
 Un Makefile est à votre disposition, vous pouvez compiler tout les exécutables avec la commande :
