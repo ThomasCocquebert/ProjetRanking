@@ -1,6 +1,7 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include "time.h"
+#include "string.h"
 #include "../lib/structure.h"
 #include "../lib/lecture.h"
 #include "../lib/vector.h"
@@ -14,24 +15,73 @@ int main(int argc, char** argv) {
 
 	time_t tempsInit = clock();
 	srand(time(0));
+	int percentage = 5;
+	int percentageArc = 0;
 	if (argc == 1) {
 		printf("\033[1;31m");
 		printf("Veuillez spécifier un graphe à ouvrir\n");
 		printf("\033[0m");
 		exit(1);
-	} else if (argc > 3) {
+	} else if(argc == 2) {
+		printf("Pourcentage = %d\n", percentage);
+	} else if(argc == 3) {
+		percentage = atoi(argv[2]);
+		if(percentage == 0) {
+			printf("\033[1;31m");
+			printf("Argument pour le pourcentage non valide\n");
+			printf("\033[0m");
+			exit(1);
+		}
+		printf("Pourcentage = %d\n", percentage);
+	} else if(argc == 4) {
+		if(!strncmp(argv[2], "-dA", 5)) {
+			percentage = atoi(argv[3]);
+			if(percentage == 0) {
+				printf("\033[1;31m");
+				printf("Argument pour le pourcentage non valide\n");
+				printf("\033[0m");
+				exit(1);
+			}
+			printf("Pourcentage = %d\n", percentage);
+		} else {
+		 	printf("\033[1;31m");
+			printf("Argument inconnue\n");
+			printf("\033[0m");
+			exit(1);
+		}
+	} else if (argc == 5) {
+		if(!strncmp(argv[2], "-dCA", 5)) {
+			percentage = atoi(argv[3]);
+			if(percentage == 0) {
+				printf("\033[1;31m");
+				printf("Argument pour le pourcentage des colonnes non valide\n");
+				printf("\033[0m");
+				exit(1);
+			}
+			percentageArc = atoi(argv[4]);
+			if(percentageArc == 0) {
+				printf("\033[1;31m");
+				printf("Argument pour le pourcentage des arcs non valide\n");
+				printf("\033[0m");
+				exit(1);
+			}
+			printf("Pourcentage = %d\n", percentage);
+			printf("Pourcentage Arc = %d\n", percentageArc);
+		} else {
+			printf("\033[1;31m");
+			printf("Argument inconnue\n");
+			printf("\033[0m");
+			exit(1);
+		}
+	} else {
 		printf("\033[1;31m");
-		printf("Trop d'arguments\n");
+		printf("Trop d'arguments entrés");
 		printf("\033[0m");
 		exit(1);
 	}
+
 	double temps = 0.0;
 	double ecart = 0.0;
-	int percentage = 15;
-	if(argv[2] != NULL){
-		percentage = atoi(argv[2]);
-	}
-	printf("Pourcentage = %d\n", percentage);
 	FILE* fichier = NULL;
 	fichier = fopen(argv[1], "r+");
 	if (fichier == NULL) {
@@ -40,7 +90,6 @@ int main(int argc, char** argv) {
 		printf("\033[0m");
 		exit(1);
 	}
-
 	// ##################################################
 
 	// ##################################################
@@ -102,17 +151,38 @@ int main(int argc, char** argv) {
 
 	tempsInitTask = clock();
 	printf("Début des modifications du graphe\n");
-	int nbDelSommets = delColumn(tab, NombreSommets, percentage);
-	printf("Nombre de sommets supprimés : %d\n", nbDelSommets);
-	int newSommets = NombreSommets -nbDelSommets;
-	printf("Nouveau nombre de sommets %d\n", newSommets);
+	int newSommets = 0;
+	if(argc < 4) {
+		int nbDelSommets = delColumn(tab, NombreSommets, percentage);
+		printf("Nombre de sommets supprimés : %d\n", nbDelSommets);
+		newSommets = NombreSommets - nbDelSommets;
+		printf("Nouveau nombre de sommets : %d\n", newSommets);
+	} else if(argc == 4) {
+		int nbDelSommets = 0;
+		int nbDelArc = delArc(tab, NombreSommets, percentage);
+		printf("Nombre d'arcs supprimés : %d\n", nbDelArc);
+		newSommets = NombreSommets - nbDelSommets;
+	} else if(argc == 5) {
+		int nbDelArc = 0;
+		int nbDelSommets = delColumnArc(&nbDelArc, tab, NombreSommets, percentage, percentageArc);
+		printf("Nombre de sommets supprimés : %d\n", nbDelSommets);
+		printf("Nombre d'arc supprimés : %d\n", nbDelArc);
+		newSommets = NombreSommets - nbDelSommets;
+		printf("Nouveau nombre de sommets : %d\n", newSommets);
+	} else {
+		printf("\033[1;31m");
+		printf("Erreur lors de la modification : Mauvais nombre d'argument");
+		printf("\033[0m");
+		freeTableau(tab, NombreSommets);
+		freeMemVEC(x);
+		exit(1);
+	}
+
 	printf("Fin des modifications du graphe\n");
 	tempsFinTask = clock();
 	temps = (float)(tempsFinTask-tempsInitTask)/CLOCKS_PER_SEC;
 	printf("Temps de modification du graphe : %lf\n\n", temps);
 	
-	
-
 	// ##################################################
 
 	// ##################################################
