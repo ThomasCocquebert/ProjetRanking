@@ -12,7 +12,14 @@ Ou seulemnt l'exécutable du main avec :
 ```bash
 make main
 ```
-
+Pour supprimer les fichiers otenue lors de la compilation : 
+```bash
+make clean
+```
+ou pour windows 
+```bash
+make cleanW
+```
 ## Format de fichier de graphe
 Les fichiers de graphes doivent **IMPERATIVEMENT** commencer par le nombre d'éléments non-nuls puis le nombre de sommets du graphe pour être acceptés et traités correctement par le programme.
 
